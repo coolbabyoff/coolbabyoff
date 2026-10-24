@@ -1,23 +1,385 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mon premier site</title>
+  <meta name="theme-color" content="#030a10">
+  <meta name="description" content="Les liens et projets de coolbabyoff.">
+  <title>coolbabyoff | Links</title>
+
   <style>
-    body {
-      background: #101820;
-      color: #27f5eb;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 80px 20px;
+    :root {
+      --bg: #030a10;
+      --cyan: #27f5eb;
+      --blue: #31aaff;
+      --text: #f2fbff;
+      --muted: #9cb7c7;
     }
-    h1 { font-size: 42px; }
-    p { color: white; }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 85px 18px 38px;
+      display: grid;
+      place-items: center;
+      overflow-x: hidden;
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(ellipse at 50% 40%,
+          rgba(0, 188, 220, .13), transparent 38%),
+        radial-gradient(ellipse at 10% 80%,
+          rgba(0, 112, 255, .10), transparent 32%),
+        var(--bg);
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      pointer-events: none;
+      width: 70vw;
+      height: 28vh;
+      border: 1px solid rgba(39, 245, 235, .24);
+      border-radius: 50%;
+      filter: drop-shadow(0 0 8px rgba(39, 245, 235, .42));
+      transform: rotate(-18deg);
+      left: -20vw;
+      top: 44vh;
+    }
+
+    body::after {
+      left: 55vw;
+      top: 56vh;
+      transform: rotate(-28deg);
+    }
+
+    .topbar {
+      position: absolute;
+      top: 25px;
+      left: 32px;
+      right: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .brand {
+      font-size: 23px;
+      letter-spacing: .12em;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 7px;
+      font-size: 8px;
+      letter-spacing: .3em;
+    }
+
+    .card {
+      width: min(100%, 470px);
+      padding: 36px 28px 27px;
+      text-align: center;
+      border: 1px solid rgba(39, 245, 235, .78);
+      border-radius: 25px;
+      background: linear-gradient(
+        145deg,
+        rgba(7, 29, 42, .88),
+        rgba(4, 19, 29, .76)
+      );
+      box-shadow:
+        0 0 34px rgba(0, 210, 255, .13),
+        inset 0 0 35px rgba(0, 210, 255, .035);
+      backdrop-filter: blur(16px);
+      animation: appear .8s ease both;
+    }
+
+    /* PHOTO DE PROFIL */
+    .avatar {
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 18px;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+      border: 3px solid var(--cyan);
+      box-shadow: 0 0 22px rgba(39, 245, 235, .42);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 7vw, 38px);
+      line-height: 1.2;
+      letter-spacing: -.04em;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      margin: 9px 0 0;
+      color: #b7d8e9;
+      font-size: 14px;
+    }
+
+    .subtitle span {
+      color: var(--cyan);
+    }
+
+    .rule {
+      width: 62px;
+      height: 3px;
+      margin: 23px auto 24px;
+      background: var(--cyan);
+      border-radius: 5px;
+      box-shadow: 0 0 12px var(--cyan);
+    }
+
+    .links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      text-align: left;
+      text-decoration: none;
+      color: var(--cyan);
+      border: 1px solid rgba(39, 245, 235, .78);
+      border-radius: 17px;
+      background: rgba(0, 15, 25, .45);
+      transition: transform .2s, background .2s, box-shadow .2s;
+    }
+
+    .link:hover,
+    .link:focus-visible {
+      transform: translateY(-3px);
+      background: rgba(39, 245, 235, .09);
+      box-shadow: 0 0 19px rgba(39, 245, 235, .17);
+      outline: none;
+    }
+
+    .link-icon {
+      width: 30px;
+      flex: 0 0 30px;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .link-copy {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .link-title {
+      display: block;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .link-desc {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .arrow {
+      font-size: 22px;
+      transition: transform .2s;
+    }
+
+    .link:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 22px;
+      margin: 27px 0 22px;
+    }
+
+    .socials a {
+      color: var(--cyan);
+      font-size: 11px;
+      text-decoration: none;
+      letter-spacing: .08em;
+    }
+
+    .socials a:hover {
+      color: white;
+    }
+
+    footer {
+      color: #8ac9d2;
+      font-size: 9px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+    }
+
+    .status {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-right: 7px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 9px var(--cyan);
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 90px 14px 28px;
+      }
+
+      .topbar {
+        top: 22px;
+        left: 18px;
+        right: 18px;
+      }
+
+      .topbar .motto {
+        font-size: 8px;
+        letter-spacing: .08em;
+      }
+
+      .card {
+        padding: 29px 17px 24px;
+      }
+
+      .link {
+        padding: 13px 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <h1>Bienvenue sur mon site !</h1>
-  <p>Hébergé gratuitement avec GitHub Pages.</p>
+
+  <header class="topbar">
+    <div class="brand">
+      AOS
+      <small></small>
+    </div>
+
+    <div class="motto">Portfolio</div>
+  </header>
+
+  <main class="card">
+
+    <!-- profile.png doit être à côté de index.html -->
+    <img
+      class="avatar"
+      src="profile.png"
+      alt="Avatar"
+    >
+
+    <h1>coolbabyoff</h1>
+
+    <p class="subtitle">
+      Developer <span>• Creator Of AgamesStudio</span>
+    </p>
+
+    <div class="rule"></div>
+
+    <nav class="links" aria-label="My Links">
+
+      <a
+        class="link"
+        href="https://github.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">⌘</span>
+        <span class="link-copy">
+          <span class="link-title">GitHub</span>
+          <span class="link-desc">My Projects (i dont have projects btw)</span>
+        </span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a
+        class="link"
+        href="https://discord.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">◉</span>
+        <span class="link-copy">
+          <span class="link-title">Discord</span>
+          <span class="link-desc">coolbabyoff</span>
+        </span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a
+        class="link"
+        href="https://github.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">&lt;/&gt;</span>
+        <span class="link-copy">
+          <span class="link-title">Projets</span>
+          <span class="link-desc">AOS et autres projets</span>
+        </span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+    </nav>
+
+    <div class="socials">
+      <a href="https://github.com/" target="_blank"
+         rel="noopener noreferrer">GITHUB</a>
+
+      <a href="https://discord.com/" target="_blank"
+         rel="noopener noreferrer">DISCORD</a>
+
+      <a href="https://youtube.com/" target="_blank"
+         rel="noopener noreferrer">YOUTUBE</a>
+    </div>
+
+    <footer>
+      <span class="status"></span>
+      AOS Operating System
+    </footer>
+
+  </main>
+
 </body>
 </html>
