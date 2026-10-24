@@ -1,204 +1,266 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#030a10">
-  <meta name="description" content="coolbabyoff — Developer, sysadmin and AgamesStudio founder.">
+  <meta name="theme-color" content="#06152b">
+  <meta name="description" content="coolbabyoff — Java & Python developer, sysadmin and AgamesStudio founder.">
   <title>coolbabyoff | Links</title>
 
   <style>
     :root {
-      --bg: #030a10;
-      --cyan: #27f5eb;
-      --blue: #31aaff;
-      --text: #f2fbff;
-      --muted: #9cb7c7;
+      --cyan: #20e9ff;
+      --blue: #39a9ff;
+      --text: #e9f7ff;
+      --muted: #a8d8f5;
+      --glass: rgba(5, 25, 51, .48);
+      --border: rgba(65, 187, 255, .66);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 90px 18px 38px;
-      display: grid;
-      place-items: center;
-      overflow-x: hidden;
+      padding: 40px 18px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       color: var(--text);
-      font-family: Arial, sans-serif;
-      background:
-        radial-gradient(ellipse at 50% 40%,
-          rgba(0,188,220,.13), transparent 38%),
-        radial-gradient(ellipse at 10% 80%,
-          rgba(0,112,255,.10), transparent 32%),
-        var(--bg);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background-color: #06152b;
+      background-image:
+        linear-gradient(
+          180deg,
+          rgba(2, 12, 30, .48) 0%,
+          rgba(3, 17, 39, .22) 45%,
+          rgba(1, 10, 26, .72) 100%
+        ),
+        url("wallpaper.webp");
+      background-position: center center;
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      overflow-x: hidden;
     }
 
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      z-index: -1;
-      pointer-events: none;
-      width: 70vw;
-      height: 28vh;
-      border: 1px solid rgba(39,245,235,.24);
-      border-radius: 50%;
-      filter: drop-shadow(0 0 8px rgba(39,245,235,.42));
-      transform: rotate(-18deg);
-      left: -20vw;
-      top: 44vh;
-    }
-
-    body::after {
-      left: 55vw;
-      top: 56vh;
-      transform: rotate(-28deg);
-    }
-
+    /* Header */
     .topbar {
-      position: absolute;
-      top: 25px;
-      left: 32px;
-      right: 32px;
+      width: 100%;
+      max-width: 1200px;
+      min-height: 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--cyan);
+      margin-bottom: 72px;
+    }
+
+    .motto {
+      color: #80caff;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .24em;
       text-transform: uppercase;
-      letter-spacing: .2em;
-      font-size: 11px;
-      font-weight: bold;
     }
 
-    .brand {
-      font-size: 23px;
-      letter-spacing: .12em;
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: #64baff;
+      font-size: 21px;
     }
 
-    .brand small {
-      display: block;
-      margin-top: 7px;
-      font-size: 8px;
-      letter-spacing: .3em;
+    .top-actions span {
+      opacity: .9;
     }
 
-    .card {
-      width: min(100%, 470px);
-      padding: 34px 25px 26px;
-      text-align: center;
-      border: 1px solid rgba(39,245,235,.78);
-      border-radius: 25px;
-      background: linear-gradient(
-        145deg,
-        rgba(7,29,42,.88),
-        rgba(4,19,29,.76)
-      );
-      box-shadow:
-        0 0 34px rgba(0,210,255,.13),
-        inset 0 0 35px rgba(0,210,255,.035);
-      backdrop-filter: blur(16px);
-      animation: appear .8s ease both;
+    .top-divider {
+      width: 1px;
+      height: 22px;
+      background: rgba(100, 186, 255, .5);
     }
 
+    /* Main profile */
+    .profile {
+      width: 100%;
+      max-width: 570px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fade-in .8s ease both;
+    }
+
+    /* Profile picture */
     .avatar {
-      width: 112px;
-      height: 112px;
-      margin: 0 auto 18px;
-      display: block;
+      position: relative;
+      z-index: 2;
+      width: 154px;
+      height: 154px;
+      margin-bottom: -13px;
+      flex-shrink: 0;
       object-fit: cover;
       object-position: center;
       border-radius: 50%;
-      border: 3px solid var(--cyan);
-      box-shadow: 0 0 22px rgba(39,245,235,.42);
+      border: 4px solid #40dfff;
+      background: rgba(4, 24, 45, .8);
+      box-shadow:
+        0 0 12px rgba(32, 233, 255, .9),
+        0 0 35px rgba(0, 166, 255, .65),
+        inset 0 0 15px rgba(32, 233, 255, .2);
     }
 
-    h1 {
+    /* Blurred transparent username plaque */
+    .name-plaque {
+      width: 100%;
+      min-height: 112px;
+      padding: 27px 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+
+      border: 1px solid rgba(100, 190, 255, .65);
+      border-radius: 25px;
+      background: rgba(49, 112, 168, .18);
+      backdrop-filter: blur(19px);
+      -webkit-backdrop-filter: blur(19px);
+
+      box-shadow:
+        inset 0 0 25px rgba(93, 186, 255, .08),
+        0 0 22px rgba(0, 145, 255, .08);
+    }
+
+    .name-plaque h1 {
       margin: 0;
-      font-size: clamp(28px, 7vw, 38px);
-      line-height: 1.2;
-      letter-spacing: -.04em;
-      background: linear-gradient(90deg, var(--blue), var(--cyan));
-      color: transparent;
-      background-clip: text;
+      color: #a9d9ff;
+      font-size: clamp(32px, 7vw, 47px);
+      font-weight: 750;
+      letter-spacing: -.035em;
+      text-shadow:
+        0 0 8px rgba(85, 176, 255, .8),
+        0 0 24px rgba(37, 145, 255, .4);
+      filter: blur(.35px);
     }
 
-    .subtitle {
-      margin: 10px 0 0;
-      color: #b7d8e9;
-      font-size: 14px;
-    }
-
-    .subtitle span { color: var(--cyan); }
-
+    /* Bio panel */
     .bio {
-      margin: 19px 0 0;
-      padding: 15px;
-      color: #c1d8e5;
-      background: rgba(0,15,25,.45);
-      border: 1px solid rgba(39,245,235,.20);
-      border-radius: 14px;
-      font-size: 13px;
+      width: 94%;
+      margin: 13px 0 22px;
+      padding: 17px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+
+      color: #d5eaff;
+      background: rgba(5, 27, 57, .49);
+      border: 1px solid rgba(80, 173, 255, .33);
+      border-radius: 23px;
+
+      backdrop-filter: blur(17px);
+      -webkit-backdrop-filter: blur(17px);
+
+      box-shadow:
+        inset 0 0 20px rgba(75, 159, 255, .045),
+        0 5px 25px rgba(0, 0, 0, .08);
+    }
+
+    .bio-icon {
+      flex-shrink: 0;
+      padding-top: 2px;
+      color: #a6e4ff;
+      font-size: 21px;
+    }
+
+    .bio p {
+      margin: 0;
+      font-size: 16px;
       line-height: 1.7;
+      letter-spacing: .01em;
     }
 
-    .bio strong { color: var(--cyan); }
-
-    .rule {
-      width: 62px;
-      height: 3px;
-      margin: 23px auto;
-      background: var(--cyan);
-      border-radius: 5px;
-      box-shadow: 0 0 12px var(--cyan);
+    .bio strong {
+      color: var(--cyan);
+      font-weight: 700;
     }
 
-    .section-title {
-      margin: 0 0 13px;
-      text-align: left;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .15em;
-      font-size: 10px;
-    }
-
+    /* Contact buttons */
     .links {
+      width: 94%;
       display: grid;
       gap: 12px;
     }
 
     .link {
       width: 100%;
+      min-height: 82px;
+      padding: 14px 20px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 14px 15px;
-      text-align: left;
-      text-decoration: none;
-      font-family: inherit;
+      gap: 19px;
+
       color: var(--cyan);
-      border: 1px solid rgba(39,245,235,.65);
-      border-radius: 16px;
-      background: rgba(0,15,25,.45);
+      text-decoration: none;
+      text-align: left;
+      font-family: inherit;
       cursor: pointer;
-      transition: transform .2s, background .2s, box-shadow .2s;
+
+      background: rgba(3, 20, 43, .70);
+      border: 1px solid rgba(0, 190, 255, .88);
+      border-radius: 23px;
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      box-shadow:
+        inset 0 0 20px rgba(0, 115, 255, .045),
+        0 0 12px rgba(0, 110, 255, .07);
+
+      transition:
+        transform .22s ease,
+        background .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
     }
 
     .link:hover,
     .link:focus-visible {
       transform: translateY(-3px);
-      background: rgba(39,245,235,.09);
-      box-shadow: 0 0 19px rgba(39,245,235,.17);
+      background: rgba(5, 46, 81, .83);
+      border-color: #55f2ff;
+      box-shadow:
+        0 0 18px rgba(0, 190, 255, .2),
+        inset 0 0 20px rgba(0, 190, 255, .07);
       outline: none;
+    }
+
+    .link:active {
+      transform: scale(.985);
     }
 
     .link-icon {
       width: 31px;
       flex: 0 0 31px;
-      text-align: center;
-      font-size: 23px;
-      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c5edff;
+    }
+
+    .link-icon svg {
+      width: 31px;
+      height: 31px;
+      display: block;
+      fill: currentColor;
     }
 
     .link-copy {
@@ -208,59 +270,93 @@
 
     .link-title {
       display: block;
-      font-weight: bold;
-      font-size: 15px;
+      margin-bottom: 4px;
+      color: #54eaff;
+      font-size: 17px;
+      font-weight: 500;
     }
 
     .link-desc {
       display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.4;
+      color: #8ed5ff;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
-    .arrow {
-      font-size: 22px;
-      transition: transform .2s;
+    .link-action {
+      flex-shrink: 0;
+      color: var(--cyan);
+      font-size: 24px;
+      transition: transform .2s ease;
     }
 
-    .link:hover .arrow { transform: translateX(4px); }
+    .link:hover .link-action {
+      transform: translateX(3px);
+    }
+
+    /* Footer */
+    .social-line {
+      width: 100%;
+      margin: 42px 0 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      color: #79caff;
+    }
+
+    .social-line::before,
+    .social-line::after {
+      content: "";
+      width: 48px;
+      height: 1px;
+      background: #168bd2;
+      box-shadow: 0 0 8px rgba(32, 233, 255, .5);
+    }
+
+    .social-line a {
+      color: #80caff;
+      text-decoration: none;
+      font-size: 21px;
+      font-weight: 600;
+      transition: color .2s, transform .2s;
+    }
+
+    .social-line a:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
 
     .footer {
-      margin-top: 26px;
-      color: #8ac9d2;
-      font-size: 9px;
-      letter-spacing: .3em;
+      margin-bottom: 5px;
+      color: #72baff;
+      text-align: center;
       text-transform: uppercase;
+      letter-spacing: .32em;
+      font-size: 10px;
+      opacity: .8;
     }
 
-    .status {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      margin-right: 7px;
-      background: var(--cyan);
-      border-radius: 50%;
-      box-shadow: 0 0 9px var(--cyan);
-    }
-
+    /* Copy notification */
     #toast {
       position: fixed;
-      bottom: 24px;
-      left: 50%;
       z-index: 10;
+      left: 50%;
+      bottom: 24px;
       width: max-content;
       max-width: calc(100% - 30px);
       padding: 13px 19px;
-      color: var(--cyan);
-      background: #071923;
+
+      color: #d9faff;
+      background: rgba(3, 23, 45, .94);
       border: 1px solid var(--cyan);
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(39,245,235,.18);
+      border-radius: 13px;
+      box-shadow: 0 0 24px rgba(0, 190, 255, .2);
+
       font-size: 13px;
+      text-align: center;
       opacity: 0;
-      transform: translate(-50%, 15px);
+      transform: translate(-50%, 12px);
       pointer-events: none;
       transition: opacity .2s, transform .2s;
     }
@@ -270,32 +366,97 @@
       transform: translate(-50%, 0);
     }
 
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(13px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    @media (max-width: 520px) {
-      body { padding: 88px 14px 28px; }
+    @media (max-width: 600px) {
+      body {
+        padding: 23px 12px 24px;
+        background-attachment: scroll;
+      }
 
       .topbar {
-        top: 22px;
-        left: 18px;
-        right: 18px;
+        margin-bottom: 55px;
       }
 
-      .topbar .motto {
-        font-size: 8px;
-        letter-spacing: .07em;
+      .motto {
+        font-size: 9px;
+        letter-spacing: .13em;
       }
 
-      .card { padding: 28px 16px 24px; }
+      .top-actions {
+        gap: 9px;
+        font-size: 17px;
+      }
 
-      .link { padding: 13px 11px; }
+      .profile {
+        max-width: 460px;
+      }
+
+      .avatar {
+        width: 125px;
+        height: 125px;
+      }
+
+      .name-plaque {
+        min-height: 90px;
+        padding: 23px 12px;
+        border-radius: 21px;
+      }
+
+      .name-plaque h1 {
+        font-size: clamp(29px, 8vw, 40px);
+      }
+
+      .bio {
+        padding: 14px;
+        gap: 12px;
+        border-radius: 19px;
+      }
+
+      .bio p {
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .link {
+        min-height: 75px;
+        padding: 12px 14px;
+        gap: 13px;
+        border-radius: 19px;
+      }
+
+      .link-title {
+        font-size: 15px;
+      }
+
+      .link-desc {
+        font-size: 12px;
+      }
+
+      .social-line {
+        margin-top: 33px;
+        gap: 19px;
+      }
+
+      .social-line::before,
+      .social-line::after {
+        width: 26px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         animation: none !important;
         transition: none !important;
       }
@@ -306,107 +467,151 @@
 <body>
 
   <header class="topbar">
-    <div class="brand">
-      AOS
-      <small>AOS OPERATING SYSTEM</small>
+    <div class="motto">DREAM&nbsp; / &nbsp;CODE&nbsp; / &nbsp;BUILD</div>
+
+    <div class="top-actions" aria-hidden="true">
+      <span>☾</span>
+      <span class="top-divider"></span>
+      <span>☼</span>
+      <span>☰</span>
     </div>
-    <div class="motto">DREAM / CODE / BUILD</div>
   </header>
 
-  <main class="card">
+  <main class="profile">
 
+    <!-- Your profile picture -->
     <img
       class="avatar"
       src="profile.png"
-      alt="Profile picture of coolbabyoff"
+      alt="coolbabyoff profile picture"
     >
 
-    <h1>coolbabyoff</h1>
+    <!-- Blurred username plaque -->
+    <section class="name-plaque">
+      <h1>coolbabyoff</h1>
+    </section>
 
-    <p class="subtitle">
-      Developer <span>• AOS Operating System</span>
-    </p>
+    <!-- English bio -->
+    <section class="bio">
+      <span class="bio-icon" aria-hidden="true">♟</span>
+      <p>
+        Yo! I'm <strong>coolbabyoff</strong>, a junior Java &amp;
+        Python developer, sysadmin, and founder of
+        <strong>AgamesStudio</strong>, specializing in Minecraft
+        resource packs!
+      </p>
+    </section>
 
-    <p class="bio">
-      Yo! I'm <strong>coolbabyoff</strong>, a junior Java &amp;
-      Python developer, sysadmin, and founder of
-      <strong>AgamesStudio</strong>, specializing in
-      Minecraft resource packs!
-    </p>
+    <!-- Contact links -->
+    <nav class="links" aria-label="My contacts and profiles">
 
-    <div class="rule"></div>
-
-    <h2 class="section-title">Contact &amp; profiles</h2>
-
-    <nav class="links" aria-label="Contacts and profiles">
-
-      <!-- Discord : copie le pseudo -->
-      <button class="link" type="button"
-        onclick="copyText('coolbabyoff', 'Discord username copied!')">
-        <span class="link-icon" aria-hidden="true">◉</span>
+      <!-- Discord: copy username -->
+      <button
+        class="link"
+        type="button"
+        onclick="copyText('coolbabyoff', 'Discord username copied!')"
+      >
+        <span class="link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M19.7 5.3A18.5 18.5 0 0 0 15.1 4l-.6 1.2a17 17 0 0 0-5 0L8.9 4a18.5 18.5 0 0 0-4.6 1.3C1.4 9.5.6 13.6 1 17.6a18.7 18.7 0 0 0 5.7 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4a13.3 13.3 0 0 0 11 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a18.7 18.7 0 0 0 5.7-2.9c.5-4.7-.8-8.8-3.3-12.3ZM8.8 14.7c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Zm6.4 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Z"/>
+          </svg>
+        </span>
         <span class="link-copy">
           <span class="link-title">Discord</span>
           <span class="link-desc">Click to copy: coolbabyoff</span>
         </span>
-        <span class="arrow" aria-hidden="true">⧉</span>
+        <span class="link-action" aria-hidden="true">▣</span>
       </button>
 
       <!-- PayPal -->
-      <a class="link"
+      <a
+        class="link"
         href="https://bit.ly/4ev9TRN"
         target="_blank"
-        rel="noopener noreferrer">
-        <span class="link-icon" aria-hidden="true">$</span>
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 3h8.3c4 0 6.2 2.2 5.5 6.1-.7 4.2-3.3 6.2-7.2 6.2h-3l-1.1 5.2H4.9L7 3Zm4.3 3-1.2 6.2h3.2c2.2 0 3.7-1.1 4.1-3.2.3-1.9-.7-3-2.9-3h-3.2Z"/>
+          </svg>
+        </span>
         <span class="link-copy">
           <span class="link-title">PayPal</span>
           <span class="link-desc">Support my projects</span>
         </span>
-        <span class="arrow" aria-hidden="true">↗</span>
+        <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
       <!-- Steam -->
-      <a class="link"
+      <a
+        class="link"
         href="https://steamcommunity.com/id/CBOfficial/"
         target="_blank"
-        rel="noopener noreferrer">
-        <span class="link-icon" aria-hidden="true">◈</span>
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 0 0-9.8 8l5.1 2.1a3.5 3.5 0 0 1 2-.6l2.3-3.3v-.1a4.4 4.4 0 1 1 4.4 4.4h-.1l-3.3 2.4a3.5 3.5 0 0 1-6.9.8l-3.6-1.5A10 10 0 1 0 12 2Zm4 4.7a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 0 0 0-5.4ZM9.3 13a2.1 2.1 0 0 0-1.9 1.3l2.4 1a1.3 1.3 0 1 1-.9 2.4l-2.4-1a2.1 2.1 0 1 0 2.8-3.7Z"/>
+          </svg>
+        </span>
         <span class="link-copy">
           <span class="link-title">Steam</span>
           <span class="link-desc">Check out my Steam profile</span>
         </span>
-        <span class="arrow" aria-hidden="true">↗</span>
+        <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
       <!-- Roblox -->
-      <a class="link"
+      <a
+        class="link"
         href="https://roblox.com/users/2521964602/profile"
         target="_blank"
-        rel="noopener noreferrer">
-        <span class="link-icon" aria-hidden="true">▧</span>
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M5.2 1.8 22.2 6.5 17.5 22.2 1.8 17.5 5.2 1.8Zm3.1 5.8-1.6 7 7 1.6 1.6-7-7-1.6Z"/>
+          </svg>
+        </span>
         <span class="link-copy">
           <span class="link-title">Roblox</span>
           <span class="link-desc">Visit my Roblox profile</span>
         </span>
-        <span class="arrow" aria-hidden="true">↗</span>
+        <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <!-- PlayStation Network : copie le pseudo -->
-      <button class="link" type="button"
-        onclick="copyText('coolbabyofficiaL', 'PlayStation Network ID copied!')">
-        <span class="link-icon" aria-hidden="true">△</span>
+      <!-- PlayStation Network: copy online ID -->
+      <button
+        class="link"
+        type="button"
+        onclick="copyText('coolbabyofficiaL', 'PlayStation Network ID copied!')"
+      >
+        <span class="link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 2.1v17.3l4.1 1.3V6.2c0-.7.3-1.2.8-1  .6.2.7.7.7 1.4v5.9c2.6 1.3 5.8.1 5.8-3.3 0-3.5-2.4-4.8-6.3-6.1C12 2.4 10.3 2 9 2.1ZM5.1 15.4 1 17c-1.3.5-.9 1.7.2 2.1 1.4.5 3.1.6 4.8.3v-2.6l-2.4.9c-.6.2-1.2.1-1.4-.2-.2-.3.1-.7.7-.9l2.2-.8v-.4Zm12.3 1.1-4.3 1.6v2.6l7.5-2.8c1.2-.5 1.1-1.6-.1-2.1-1-.4-2-.4-3.1-.2Z"/>
+          </svg>
+        </span>
         <span class="link-copy">
           <span class="link-title">PlayStation Network</span>
           <span class="link-desc">Click to copy: coolbabyofficiaL</span>
         </span>
-        <span class="arrow" aria-hidden="true">⧉</span>
+        <span class="link-action" aria-hidden="true">▣</span>
       </button>
 
     </nav>
 
-    <footer class="footer">
-      <span class="status"></span>
-      AOS Operating System
-    </footer>
+    <div class="social-line" aria-label="Social profiles">
+      <a href="https://github.com/" target="_blank"
+         rel="noopener noreferrer" aria-label="GitHub">⌘</a>
+      <a href="https://discord.com/" target="_blank"
+         rel="noopener noreferrer" aria-label="Discord">◉</a>
+      <a href="https://youtube.com/" target="_blank"
+         rel="noopener noreferrer" aria-label="YouTube">▶</a>
+      <a href="https://x.com/" target="_blank"
+         rel="noopener noreferrer" aria-label="X">𝕏</a>
+    </div>
+
+    <footer class="footer">Made with ♥</footer>
 
   </main>
 
@@ -417,10 +622,12 @@
 
     function showToast(message) {
       const toast = document.getElementById("toast");
+
       toast.textContent = message;
       toast.classList.add("show");
 
       clearTimeout(toastTimer);
+
       toastTimer = setTimeout(() => {
         toast.classList.remove("show");
       }, 2300);
@@ -432,21 +639,25 @@
           await navigator.clipboard.writeText(text);
         } else {
           const textarea = document.createElement("textarea");
+
           textarea.value = text;
           textarea.style.position = "fixed";
           textarea.style.left = "-9999px";
+
           document.body.appendChild(textarea);
           textarea.select();
 
           const success = document.execCommand("copy");
           textarea.remove();
 
-          if (!success) throw new Error("Copy failed");
+          if (!success) {
+            throw new Error("Copy failed");
+          }
         }
 
         showToast(message);
       } catch (error) {
-        showToast("Copy failed. Please copy it manually: " + text);
+        showToast("Copy manually: " + text);
       }
     }
   </script>
