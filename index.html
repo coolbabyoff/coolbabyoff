@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#06152b">
   <meta name="description" content="coolbabyoff — Java & Python developer, sysadmin and AgamesStudio founder.">
+  <link rel="icon" type="image/png" href="avatar.png">
   <title>coolbabyoff | Portfolio</title>
 
   <style>
@@ -49,7 +50,6 @@
       overflow-x: hidden;
     }
 
-    /* Header */
     .topbar {
       width: 100%;
       max-width: 1200px;
@@ -61,7 +61,6 @@
       text-transform: uppercase;
     }
 
-    /* Profile */
     .profile {
       width: 100%;
       max-width: 570px;
@@ -88,7 +87,6 @@
         0 0 35px rgba(0, 166, 255, .65);
     }
 
-    /* Glass username plaque */
     .name-plaque {
       width: 100%;
       min-height: 112px;
@@ -121,7 +119,6 @@
       filter: blur(.35px);
     }
 
-    /* Bio */
     .bio {
       width: 94%;
       margin: 13px 0 22px;
@@ -157,7 +154,6 @@
       font-weight: 700;
     }
 
-    /* Contact buttons */
     .links {
       width: 94%;
       display: grid;
@@ -204,7 +200,6 @@
       transform: scale(.985);
     }
 
-    /* Custom logos */
     .link-logo {
       width: 34px;
       height: 34px;
@@ -245,7 +240,6 @@
       transform: translateX(3px);
     }
 
-    /* Copy notification */
     #toast {
       position: fixed;
       z-index: 10;
@@ -272,7 +266,6 @@
       transform: translate(-50%, 0);
     }
 
-    /* Footer */
     .footer {
       margin-top: 42px;
       margin-bottom: 5px;
@@ -289,6 +282,7 @@
         opacity: 0;
         transform: translateY(13px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -373,26 +367,25 @@
 </head>
 
 <body>
+  <audio id="background-music" autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
 
   <header class="topbar">
     Portfolio
   </header>
 
   <main class="profile">
-
-    <!-- Profile picture -->
     <img
       class="avatar"
       src="profile.png"
       alt="coolbabyoff profile picture"
     >
 
-    <!-- Transparent and blurred username plaque -->
     <section class="name-plaque">
       <h1>coolbabyoff</h1>
     </section>
 
-    <!-- English bio -->
     <section class="bio">
       <span class="bio-icon" aria-hidden="true">♟</span>
       <p>
@@ -403,10 +396,7 @@
       </p>
     </section>
 
-    <!-- Contacts -->
     <nav class="links" aria-label="My contacts and profiles">
-
-      <!-- Discord: copies username -->
       <button
         class="link"
         type="button"
@@ -420,7 +410,6 @@
         <span class="link-action" aria-hidden="true">▣</span>
       </button>
 
-      <!-- PayPal -->
       <a
         class="link"
         href="https://bit.ly/4ev9TRN"
@@ -435,7 +424,6 @@
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <!-- Steam -->
       <a
         class="link"
         href="https://steamcommunity.com/id/CBOfficial/"
@@ -450,7 +438,6 @@
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <!-- Roblox -->
       <a
         class="link"
         href="https://roblox.com/users/2521964602/profile"
@@ -465,7 +452,6 @@
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <!-- PlayStation Network: copies online ID -->
       <button
         class="link"
         type="button"
@@ -478,11 +464,9 @@
         </span>
         <span class="link-action" aria-hidden="true">▣</span>
       </button>
-
     </nav>
 
     <footer class="footer">Made with ♥</footer>
-
   </main>
 
   <div id="toast" role="status" aria-live="polite"></div>
@@ -529,7 +513,15 @@
         showToast("Copy manually: " + text);
       }
     }
-  </script>
 
+    const music = document.getElementById("background-music");
+    music.volume = 0.25;
+
+    music.play().catch(() => {
+      document.addEventListener("click", () => {
+        music.play().catch(() => {});
+      }, { once: true });
+    });
+  </script>
 </body>
 </html>
