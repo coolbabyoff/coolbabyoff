@@ -54,6 +54,48 @@
       overflow: hidden;
     }
 
+    /* Cookie Clicker button */
+    .cookie-clicker-button {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10000;
+      min-height: 58px;
+      padding: 12px 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #a9d9ff;
+      background: rgba(3,20,43,.88);
+      border: 1px solid rgba(32,233,255,.65);
+      border-radius: 16px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 0 18px rgba(0,190,255,.12);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition:
+        background .2s,
+        transform .2s,
+        box-shadow .2s;
+    }
+
+    .cookie-clicker-button:hover,
+    .cookie-clicker-button:focus-visible {
+      background: rgba(5,46,81,.95);
+      transform: translateY(-2px);
+      box-shadow: 0 0 18px rgba(0,190,255,.25);
+    }
+
+    .cookie-clicker-button:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
     #enter-screen {
       position: fixed;
       inset: 0;
@@ -202,28 +244,23 @@
       text-align: center;
       position: relative;
       z-index: 1;
-
       border: 1px solid rgba(100,190,255,.65);
       border-radius: 25px;
       background: rgba(49,112,168,.22);
       backdrop-filter: blur(19px);
       -webkit-backdrop-filter: blur(19px);
-
       box-shadow:
         inset 0 0 25px rgba(93,186,255,.08),
         0 0 22px rgba(0,145,255,.08);
-
       transform: translate3d(
         var(--magnet-x),
         var(--magnet-y),
         0
       );
-
       transition:
         transform .22s cubic-bezier(.2,.8,.2,1),
         border-color .25s ease,
         box-shadow .25s ease;
-
       will-change: transform;
     }
 
@@ -359,6 +396,35 @@
 
     .link:hover .link-action {
       transform: translateX(3px);
+    }
+
+    .link.contact-button {
+      background: linear-gradient(
+        110deg,
+        #ffad32 0%,
+        #ff6b25 45%,
+        #ed303b 100%
+      );
+      border-color: rgba(255,126,45,.9);
+      box-shadow: 0 0 18px rgba(255,91,35,.12);
+    }
+
+    .link.contact-button .link-title,
+    .link.contact-button .link-desc,
+    .link.contact-button .link-action {
+      color: #fff;
+    }
+
+    .link.contact-button:hover,
+    .link.contact-button:focus-visible {
+      background: linear-gradient(
+        110deg,
+        #ffc45c 0%,
+        #ff572d 48%,
+        #d91d42 100%
+      );
+      border-color: #ffbd70;
+      box-shadow: 0 0 22px rgba(255,76,39,.3);
     }
 
     #toast {
@@ -522,6 +588,14 @@
     }
 
     @media (max-width: 420px) {
+      .cookie-clicker-button {
+        top: 10px;
+        left: 10px;
+        min-height: 52px;
+        padding: 10px 11px;
+        font-size: 10px;
+      }
+
       .audio-controls {
         top: 10px;
         right: 10px;
@@ -549,31 +623,22 @@
       *::after {
         animation: none !important;
         transition: none !important;
+        scroll-behavior: auto !important;
       }
-    }
-
-    .link.contact-button {
-      background: linear-gradient(110deg, #ffad32 0%, #ff6b25 45%, #ed303b 100%);
-      border-color: rgba(255,126,45,.9);
-      box-shadow: 0 0 18px rgba(255,91,35,.12);
-    }
-
-    .link.contact-button .link-title,
-    .link.contact-button .link-desc,
-    .link.contact-button .link-action {
-      color: #fff;
-    }
-
-    .link.contact-button:hover,
-    .link.contact-button:focus-visible {
-      background: linear-gradient(110deg, #ffc45c 0%, #ff572d 48%, #d91d42 100%);
-      border-color: #ffbd70;
-      box-shadow: 0 0 22px rgba(255,76,39,.3);
     }
   </style>
 </head>
 
 <body class="enter-locked">
+
+  <!-- Cookie Clicker: opens in the same tab -->
+  <a
+    href="https://coolbabyoff.github.io/cookiesclicker"
+    class="cookie-clicker-button"
+    aria-label="Open Cookie Clicker"
+  >
+    Cookie Clicker
+  </a>
 
   <div
     id="enter-screen"
@@ -869,6 +934,7 @@
       magnetFrame = null;
 
       const rect = magnetPlaque.getBoundingClientRect();
+
       const currentX =
         parseFloat(
           getComputedStyle(magnetPlaque)
@@ -888,6 +954,7 @@
       const dy = pointerY - centerY;
 
       const distance = Math.hypot(dx, dy);
+
       const strength = Math.max(
         0,
         1 - distance / magnetRadius
@@ -981,14 +1048,23 @@
       });
     });
 
+    /* Browser-local visit counter */
     const visitCountElement = document.getElementById("visit-count");
     const visitStorageKey = "coolbabyoff-portfolio-visits";
 
-    let visitCount = Number(localStorage.getItem(visitStorageKey)) || 0;
-    visitCount += 1;
+    try {
+      let visitCount =
+        Number(localStorage.getItem(visitStorageKey)) || 0;
 
-    localStorage.setItem(visitStorageKey, String(visitCount));
-    visitCountElement.textContent = visitCount.toLocaleString("en-US");
+      visitCount += 1;
+
+      localStorage.setItem(visitStorageKey, String(visitCount));
+
+      visitCountElement.textContent =
+        visitCount.toLocaleString("en-US");
+    } catch (error) {
+      visitCountElement.textContent = "Unavailable";
+    }
 
     updateAudioButton();
   </script>
