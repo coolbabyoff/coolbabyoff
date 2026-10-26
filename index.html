@@ -387,6 +387,46 @@
       transform: translate(-50%,0);
     }
 
+    .visit-counter {
+      width: 94%;
+      margin-top: 16px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: #a9d9ff;
+      background: rgba(3,20,43,.72);
+      border: 1px solid rgba(32,233,255,.45);
+      border-radius: 18px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 0 18px rgba(0,190,255,.08);
+      text-align: center;
+    }
+
+    .visit-counter-label {
+      color: #72baff;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+
+    .visit-counter-number {
+      color: var(--cyan);
+      font-size: 26px;
+      font-weight: 750;
+      line-height: 1.2;
+      text-shadow: 0 0 12px rgba(32,233,255,.35);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .visit-counter-note {
+      color: #8ed5ff;
+      font-size: 11px;
+    }
+
     .footer {
       margin-top: 42px;
       margin-bottom: 5px;
@@ -549,9 +589,9 @@
       id="audio-toggle"
       class="audio-toggle"
       type="button"
-      aria-label="Activer la musique"
+      aria-label="Enable music"
       aria-pressed="false"
-      title="Activer ou couper la musique"
+      title="Toggle background music"
     >♫</button>
 
     <div class="audio-volume">
@@ -565,7 +605,7 @@
         min="0"
         max="100"
         value="50"
-        aria-label="Volume de la musique"
+        aria-label="Music volume"
       >
     </div>
   </div>
@@ -699,13 +739,18 @@
 
     </nav>
 
+    <section class="visit-counter" aria-label="Visit counter">
+      <span class="visit-counter-label">Your visits</span>
+      <span class="visit-counter-number" id="visit-count">0</span>
+      <span class="visit-counter-note">Visits from this browser</span>
+    </section>
+
     <footer class="footer">Made with ♥</footer>
   </main>
 
   <div id="toast" role="status" aria-live="polite"></div>
 
   <script>
-
     const enterScreen = document.getElementById("enter-screen");
     const backgroundMusic = document.getElementById("background-music");
     const audioToggle = document.getElementById("audio-toggle");
@@ -724,14 +769,14 @@
 
       audioToggle.setAttribute(
         "aria-label",
-        playing ? "Couper la musique" : "Activer la musique"
+        playing ? "Mute music" : "Enable music"
       );
 
       audioToggle.setAttribute("aria-pressed", String(playing));
 
       audioToggle.title = playing
-        ? "Couper la musique"
-        : "Activer la musique";
+        ? "Mute music"
+        : "Enable music";
     }
 
     async function enterSite() {
@@ -772,7 +817,7 @@
         try {
           await backgroundMusic.play();
         } catch (error) {
-          showToast("Clique sur CLICK TO ENTER pour lancer la musique.");
+          showToast("Click CLICK TO ENTER to start the music.");
           return;
         }
       } else {
@@ -850,6 +895,7 @@
 
       let offsetX = dx * strength * magnetForce;
       let offsetY = dy * strength * magnetForce;
+
       offsetX = Math.max(
         -maxMagnetOffset,
         Math.min(maxMagnetOffset, offsetX)
@@ -934,6 +980,15 @@
         );
       });
     });
+
+    const visitCountElement = document.getElementById("visit-count");
+    const visitStorageKey = "coolbabyoff-portfolio-visits";
+
+    let visitCount = Number(localStorage.getItem(visitStorageKey)) || 0;
+    visitCount += 1;
+
+    localStorage.setItem(visitStorageKey, String(visitCount));
+    visitCountElement.textContent = visitCount.toLocaleString("en-US");
 
     updateAudioButton();
   </script>
