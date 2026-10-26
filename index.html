@@ -54,10 +54,8 @@
       overflow: hidden;
     }
 
-    /* Cookie Clicker button */
-    .cookie-clicker-button {
+    .floating-button {
       position: fixed;
-      top: 18px;
       left: 18px;
       z-index: 10000;
       min-height: 58px;
@@ -84,26 +82,22 @@
         box-shadow .2s;
     }
 
-    .cookie-clicker-button:hover,
-    .cookie-clicker-button:focus-visible {
+    .cookie-clicker-button {
+      top: 18px;
+    }
+
+    .githubkart-button {
+      top: 88px;
+    }
+
+    .floating-button:hover,
+    .floating-button:focus-visible {
       background: rgba(5,46,81,.95);
       transform: translateY(-2px);
       box-shadow: 0 0 18px rgba(0,190,255,.25);
     }
 
-    .cookie-clicker-button:focus-visible {
-      outline: 2px solid var(--cyan);
-      outline-offset: 4px;
-    }
-
-    .githubkart-button:hover,
-    .githubkart-button:focus-visible {
-      background: rgba(5,46,81,.95);
-      transform: translateY(-2px);
-      box-shadow: 0 0 18px rgba(0,190,255,.25);
-    }
-
-    .githubkart-button:focus-visible {
+    .floating-button:focus-visible {
       outline: 2px solid var(--cyan);
       outline-offset: 4px;
     }
@@ -600,12 +594,19 @@
     }
 
     @media (max-width: 420px) {
-      .cookie-clicker-button {
-        top: 10px;
+      .floating-button {
         left: 10px;
         min-height: 52px;
         padding: 10px 11px;
         font-size: 10px;
+      }
+
+      .cookie-clicker-button {
+        top: 10px;
+      }
+
+      .githubkart-button {
+        top: 72px;
       }
 
       .audio-controls {
@@ -645,15 +646,15 @@
 
   <a
     href="https://coolbabyoff.github.io/cookiesclicker"
-    class="cookie-clicker-button"
+    class="floating-button cookie-clicker-button"
     aria-label="Open Cookie Clicker"
   >
     Cookie Clicker
   </a>
 
-    <a
+  <a
     href="https://coolbabyoff.github.io/githubkart"
-    class="githubkart-button"
+    class="floating-button githubkart-button"
     aria-label="Open GithubCart"
   >
     GithubCart
@@ -1067,7 +1068,6 @@
       });
     });
 
-    /* Browser-local visit counter */
     const visitCountElement = document.getElementById("visit-count");
     const visitStorageKey = "coolbabyoff-portfolio-visits";
 
