@@ -182,9 +182,11 @@
       box-shadow: 0 0 12px rgba(32,233,255,.9), 0 0 35px rgba(0,166,255,.65);
     }
 
+    /* Plaque en verre avec attraction verticale uniquement */
+
     .name-plaque {
-      --magnet-x: 0px;
       --magnet-y: 0px;
+
       width: 100%;
       min-height: 112px;
       padding: 27px 18px;
@@ -202,11 +204,15 @@
       box-shadow:
         inset 0 0 25px rgba(93,186,255,.08),
         0 0 22px rgba(0,145,255,.08);
-      transform: translate3d(var(--magnet-x), var(--magnet-y), 0);
+
+      /* X reste toujours à zéro */
+      transform: translate3d(0, var(--magnet-y), 0);
+
       transition:
         transform .22s cubic-bezier(.2,.8,.2,1),
         border-color .25s ease,
         box-shadow .25s ease;
+
       will-change: transform;
     }
 
@@ -456,15 +462,33 @@
 </head>
 
 <body class="enter-locked">
+
   <div id="enter-screen" role="button" tabindex="0" aria-label="Click to enter">
     <span>CLICK TO ENTER</span>
   </div>
 
   <div class="audio-controls">
-    <button id="audio-toggle" class="audio-toggle" type="button" aria-label="Activer la musique" aria-pressed="false" title="Activer ou couper la musique">♫</button>
+    <button
+      id="audio-toggle"
+      class="audio-toggle"
+      type="button"
+      aria-label="Activer la musique"
+      aria-pressed="false"
+      title="Activer ou couper la musique"
+    >♫</button>
+
     <div class="audio-volume">
-      <label for="audio-volume">Volume <span id="volume-value">50%</span></label>
-      <input id="audio-volume" type="range" min="0" max="100" value="50" aria-label="Volume de la musique">
+      <label for="audio-volume">
+        Volume <span id="volume-value">50%</span>
+      </label>
+      <input
+        id="audio-volume"
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        aria-label="Volume de la musique"
+      >
     </div>
   </div>
 
@@ -491,7 +515,13 @@
     </section>
 
     <nav class="links" aria-label="My contacts and profiles">
-      <button class="link" type="button" data-copy="coolbabyoff" data-message="Discord username copied!">
+
+      <button
+        class="link"
+        type="button"
+        data-copy="coolbabyoff"
+        data-message="Discord username copied!"
+      >
         <img class="link-logo" src="./discord.png" alt="">
         <span class="link-copy">
           <span class="link-title">Discord</span>
@@ -500,7 +530,12 @@
         <span class="link-action" aria-hidden="true">▣</span>
       </button>
 
-      <a class="link" href="https://bit.ly/4ev9TRN" target="_blank" rel="noopener noreferrer">
+      <a
+        class="link"
+        href="https://bit.ly/4ev9TRN"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img class="link-logo" src="./paypal.png" alt="">
         <span class="link-copy">
           <span class="link-title">PayPal</span>
@@ -509,7 +544,12 @@
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <a class="link" href="https://steamcommunity.com/id/CBOfficial/" target="_blank" rel="noopener noreferrer">
+      <a
+        class="link"
+        href="https://steamcommunity.com/id/CBOfficial/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img class="link-logo" src="./steam.png" alt="">
         <span class="link-copy">
           <span class="link-title">Steam</span>
@@ -518,7 +558,12 @@
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <a class="link" href="https://roblox.com/users/2521964602/profile" target="_blank" rel="noopener noreferrer">
+      <a
+        class="link"
+        href="https://roblox.com/users/2521964602/profile"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img class="link-logo" src="./roblox.png" alt="">
         <span class="link-copy">
           <span class="link-title">Roblox</span>
@@ -527,7 +572,12 @@
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <button class="link" type="button" data-copy="coolbabyofficiaL" data-message="PlayStation Network ID copied!">
+      <button
+        class="link"
+        type="button"
+        data-copy="coolbabyofficiaL"
+        data-message="PlayStation Network ID copied!"
+      >
         <img class="link-logo" src="./playstation.png" alt="">
         <span class="link-copy">
           <span class="link-title">PlayStation Network</span>
@@ -535,6 +585,7 @@
         </span>
         <span class="link-action" aria-hidden="true">▣</span>
       </button>
+
     </nav>
 
     <footer class="footer">Made with ♥</footer>
@@ -543,79 +594,53 @@
   <div id="toast" role="status" aria-live="polite"></div>
 
   <script>
+    // ==========================================
+    // ENTRÉE ET MUSIQUE
+    // ==========================================
+
     const enterScreen = document.getElementById("enter-screen");
     const backgroundMusic = document.getElementById("background-music");
     const audioToggle = document.getElementById("audio-toggle");
     const audioVolume = document.getElementById("audio-volume");
     const volumeValue = document.getElementById("volume-value");
-    const toast = document.getElementById("toast");
-    const magnetPlaque = document.querySelector(".name-plaque");
 
     let entering = false;
-    let toastTimer;
-    let magnetFrame = null;
-    let pointerX = 0;
-    let pointerY = 0;
 
     backgroundMusic.volume = 0.5;
 
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove("show"), 2300);
-    }
-
-    async function copyText(value, message) {
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(value);
-        } else {
-          const textarea = document.createElement("textarea");
-          textarea.value = value;
-          textarea.style.position = "fixed";
-          textarea.style.left = "-9999px";
-          document.body.appendChild(textarea);
-          textarea.select();
-          const copied = document.execCommand("copy");
-          textarea.remove();
-          if (!copied) throw new Error("Copy failed");
-        }
-
-        showToast(message);
-      } catch (error) {
-        showToast("Copy manually: " + value);
-      }
-    }
-
-    document.querySelectorAll("[data-copy]").forEach(button => {
-      button.addEventListener("click", () => {
-        copyText(button.dataset.copy, button.dataset.message);
-      });
-    });
-
     function updateAudioButton() {
-      const playing = !backgroundMusic.paused && !backgroundMusic.muted;
+      const playing = !backgroundMusic.paused &&
+                      !backgroundMusic.muted;
+
       audioToggle.textContent = playing ? "♫" : "♪";
-      audioToggle.setAttribute("aria-label", playing ? "Couper la musique" : "Activer la musique");
+      audioToggle.setAttribute(
+        "aria-label",
+        playing ? "Couper la musique" : "Activer la musique"
+      );
       audioToggle.setAttribute("aria-pressed", String(playing));
-      audioToggle.title = playing ? "Couper la musique" : "Activer la musique";
+      audioToggle.title = playing
+        ? "Couper la musique"
+        : "Activer la musique";
     }
 
     async function enterSite() {
       if (entering) return;
+
       entering = true;
 
       try {
         await backgroundMusic.play();
+
         enterScreen.classList.add("hidden");
         document.body.classList.remove("enter-locked");
+
         updateAudioButton();
 
         setTimeout(() => enterScreen.remove(), 750);
       } catch (error) {
         entering = false;
-        enterScreen.querySelector("span").textContent = "CLICK TO ENTER — TRY AGAIN";
+        enterScreen.querySelector("span").textContent =
+          "CLICK TO ENTER — TRY AGAIN";
       }
     }
 
@@ -647,6 +672,7 @@
 
     audioVolume.addEventListener("input", () => {
       const volume = Number(audioVolume.value);
+
       backgroundMusic.volume = volume / 100;
       volumeValue.textContent = volume + "%";
 
@@ -661,8 +687,25 @@
     backgroundMusic.addEventListener("pause", updateAudioButton);
     backgroundMusic.addEventListener("volumechange", updateAudioButton);
 
+    // ==========================================
+    // PLAQUE MAGNÉTIQUE : AXE VERTICAL SEULEMENT
+    // ==========================================
+
+    const magnetPlaque = document.querySelector(".name-plaque");
+
+    let pointerY = 0;
+    let magnetFrame = null;
+
+    const magnetRadius = 350;
+    const maxMagnetOffset = 65;
+    const magnetForce = 0.28;
+
     function resetMagnet() {
-      magnetPlaque.style.setProperty("--magnet-x", "0px");
+      if (magnetFrame !== null) {
+        cancelAnimationFrame(magnetFrame);
+        magnetFrame = null;
+      }
+
       magnetPlaque.style.setProperty("--magnet-y", "0px");
       magnetPlaque.classList.remove("magnet-active");
     }
@@ -671,27 +714,47 @@
       magnetFrame = null;
 
       const rect = magnetPlaque.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const dx = pointerX - centerX;
+
+      // Centre corrigé pour ne pas cumuler les déplacements.
+      const currentOffset =
+        parseFloat(
+          getComputedStyle(magnetPlaque)
+            .getPropertyValue("--magnet-y")
+        ) || 0;
+
+      const centerY =
+        rect.top + rect.height / 2 - currentOffset;
+
       const dy = pointerY - centerY;
-      const distance = Math.hypot(dx, dy);
-      const radius = 350;
-      const strength = Math.max(0, 1 - distance / radius);
-      const maxOffset = 65;
+      const distance = Math.abs(dy);
 
-      const offsetX = Math.max(-maxOffset, Math.min(maxOffset, dx * strength * 0.28));
-      const offsetY = Math.max(-maxOffset, Math.min(maxOffset, dy * strength * 0.28));
+      const strength = Math.max(
+        0,
+        1 - distance / magnetRadius
+      );
 
-      magnetPlaque.style.setProperty("--magnet-x", `${offsetX}px`);
-      magnetPlaque.style.setProperty("--magnet-y", `${offsetY}px`);
-      magnetPlaque.classList.toggle("magnet-active", strength > 0);
+      let offsetY = dy * strength * magnetForce;
+
+      offsetY = Math.max(
+        -maxMagnetOffset,
+        Math.min(maxMagnetOffset, offsetY)
+      );
+
+      // Aucun calcul ni déplacement horizontal.
+      magnetPlaque.style.setProperty(
+        "--magnet-y",
+        `${offsetY}px`
+      );
+
+      magnetPlaque.classList.toggle(
+        "magnet-active",
+        strength > 0
+      );
     }
 
     document.addEventListener("pointermove", event => {
       if (event.pointerType === "touch") return;
 
-      pointerX = event.clientX;
       pointerY = event.clientY;
 
       if (magnetFrame === null) {
@@ -701,6 +764,62 @@
 
     document.addEventListener("pointerleave", resetMagnet);
     window.addEventListener("blur", resetMagnet);
+    window.addEventListener("resize", resetMagnet);
+
+    // ==========================================
+    // COPIE DES IDENTIFIANTS
+    // ==========================================
+
+    const toast = document.getElementById("toast");
+    let toastTimer;
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2300);
+    }
+
+    async function copyText(value, message) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(value);
+        } else {
+          const textarea = document.createElement("textarea");
+
+          textarea.value = value;
+          textarea.style.position = "fixed";
+          textarea.style.left = "-9999px";
+
+          document.body.appendChild(textarea);
+          textarea.select();
+
+          const copied = document.execCommand("copy");
+          textarea.remove();
+
+          if (!copied) {
+            throw new Error("Copy failed");
+          }
+        }
+
+        showToast(message);
+      } catch (error) {
+        showToast("Copy manually: " + value);
+      }
+    }
+
+    document.querySelectorAll("[data-copy]").forEach(button => {
+      button.addEventListener("click", () => {
+        copyText(
+          button.dataset.copy,
+          button.dataset.message
+        );
+      });
+    });
 
     updateAudioButton();
   </script>
