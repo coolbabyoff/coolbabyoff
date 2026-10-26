@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#06152b">
-  <meta name="description" content="coolbabyoff — Java & Python developer, sysadmin and AgamesStudio founder.">
-  <link rel="icon" type="image/png" href="favicon.ico">
+  <meta name="description" content="coolbabyoff — Java and Python developer, sysadmin and AgamesStudio founder.">
+  <link rel="icon" href="./favicon.ico?v=2" sizes="any">
   <title>coolbabyoff | Portfolio</title>
 
   <style>
@@ -36,13 +36,8 @@
       font-family: Inter, "Segoe UI", Arial, sans-serif;
       background-color: #06152b;
       background-image:
-        linear-gradient(
-          180deg,
-          rgba(2, 12, 30, .48),
-          rgba(3, 17, 39, .22) 45%,
-          rgba(1, 10, 26, .72)
-        ),
-        url("wallpaper.webp");
+        linear-gradient(180deg, rgba(2,12,30,.48), rgba(3,17,39,.22) 45%, rgba(1,10,26,.72)),
+        url("./wallpaper.webp");
       background-position: center;
       background-size: cover;
       background-attachment: fixed;
@@ -62,7 +57,7 @@
       align-items: center;
       justify-content: center;
       padding: 24px;
-      background: rgba(3, 15, 35, .42);
+      background: rgba(3,15,35,.42);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       cursor: pointer;
@@ -79,13 +74,11 @@
 
     #enter-screen span {
       color: #a9d9ff;
-      font-size: clamp(22px, 5vw, 36px);
+      font-size: clamp(22px,5vw,36px);
       font-weight: 700;
       letter-spacing: .22em;
       text-align: center;
-      text-shadow:
-        0 0 12px #20e9ff,
-        0 0 30px #39a9ff;
+      text-shadow: 0 0 12px #20e9ff, 0 0 30px #39a9ff;
       animation: enter-pulse 2s ease-in-out infinite;
     }
 
@@ -104,12 +97,12 @@
       gap: 12px;
       padding: 10px 14px;
       color: #a9d9ff;
-      background: rgba(3, 20, 43, .78);
-      border: 1px solid rgba(32, 233, 255, .65);
+      background: rgba(3,20,43,.88);
+      border: 1px solid rgba(32,233,255,.65);
       border-radius: 16px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 0 18px rgba(0, 190, 255, .12);
+      box-shadow: 0 0 18px rgba(0,190,255,.12);
     }
 
     .audio-toggle {
@@ -119,9 +112,9 @@
       width: 38px;
       height: 38px;
       padding: 0;
-      color: #20e9ff;
-      background: rgba(32, 233, 255, .08);
-      border: 1px solid rgba(32, 233, 255, .4);
+      color: var(--cyan);
+      background: rgba(32,233,255,.08);
+      border: 1px solid rgba(32,233,255,.4);
       border-radius: 11px;
       font-size: 19px;
       cursor: pointer;
@@ -129,14 +122,8 @@
     }
 
     .audio-toggle:hover {
-      background: rgba(32, 233, 255, .2);
+      background: rgba(32,233,255,.2);
       transform: scale(1.05);
-    }
-
-    .audio-toggle:focus-visible,
-    .audio-volume input:focus-visible {
-      outline: 2px solid var(--cyan);
-      outline-offset: 3px;
     }
 
     .audio-volume {
@@ -156,20 +143,8 @@
 
     .audio-volume input {
       width: 100px;
-      accent-color: #20e9ff;
+      accent-color: var(--cyan);
       cursor: pointer;
-    }
-
-    @keyframes enter-pulse {
-      0%, 100% {
-        opacity: .65;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.04);
-      }
     }
 
     .topbar {
@@ -203,13 +178,13 @@
       object-position: center;
       border-radius: 50%;
       border: 4px solid #40dfff;
-      background: rgba(4, 24, 45, .8);
-      box-shadow:
-        0 0 12px rgba(32, 233, 255, .9),
-        0 0 35px rgba(0, 166, 255, .65);
+      background: rgba(4,24,45,.8);
+      box-shadow: 0 0 12px rgba(32,233,255,.9), 0 0 35px rgba(0,166,255,.65);
     }
 
     .name-plaque {
+      --magnet-x: 0px;
+      --magnet-y: 0px;
       width: 100%;
       min-height: 112px;
       padding: 27px 18px;
@@ -219,26 +194,37 @@
       text-align: center;
       position: relative;
       z-index: 1;
-      border: 1px solid rgba(100, 190, 255, .65);
+      border: 1px solid rgba(100,190,255,.65);
       border-radius: 25px;
-      background: rgba(49, 112, 168, .18);
+      background: rgba(49,112,168,.22);
       backdrop-filter: blur(19px);
       -webkit-backdrop-filter: blur(19px);
       box-shadow:
-        inset 0 0 25px rgba(93, 186, 255, .08),
-        0 0 22px rgba(0, 145, 255, .08);
+        inset 0 0 25px rgba(93,186,255,.08),
+        0 0 22px rgba(0,145,255,.08);
+      transform: translate3d(var(--magnet-x), var(--magnet-y), 0);
+      transition:
+        transform .22s cubic-bezier(.2,.8,.2,1),
+        border-color .25s ease,
+        box-shadow .25s ease;
+      will-change: transform;
+    }
+
+    .name-plaque.magnet-active {
+      border-color: rgba(32,233,255,.95);
+      box-shadow:
+        inset 0 0 30px rgba(32,233,255,.12),
+        0 0 25px rgba(32,190,255,.2),
+        0 0 45px rgba(0,145,255,.12);
     }
 
     .name-plaque h1 {
       margin: 0;
       color: #a9d9ff;
-      font-size: clamp(32px, 7vw, 47px);
+      font-size: clamp(32px,7vw,47px);
       font-weight: 750;
       letter-spacing: -.035em;
-      text-shadow:
-        0 0 8px rgba(85, 176, 255, .8),
-        0 0 24px rgba(37, 145, 255, .4);
-      filter: blur(.35px);
+      text-shadow: 0 0 8px rgba(85,176,255,.8), 0 0 24px rgba(37,145,255,.4);
     }
 
     .bio {
@@ -249,12 +235,11 @@
       align-items: flex-start;
       gap: 18px;
       color: #d5eaff;
-      background: rgba(5, 27, 57, .49);
-      border: 1px solid rgba(80, 173, 255, .33);
+      background: rgba(5,27,57,.65);
+      border: 1px solid rgba(80,173,255,.33);
       border-radius: 23px;
       backdrop-filter: blur(17px);
       -webkit-backdrop-filter: blur(17px);
-      box-shadow: inset 0 0 20px rgba(75, 159, 255, .045);
     }
 
     .bio-icon {
@@ -294,32 +279,21 @@
       text-align: left;
       font-family: inherit;
       cursor: pointer;
-      background: rgba(3, 20, 43, .70);
-      border: 1px solid rgba(0, 190, 255, .88);
+      background: rgba(3,20,43,.78);
+      border: 1px solid rgba(0,190,255,.88);
       border-radius: 23px;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow:
-        inset 0 0 20px rgba(0, 115, 255, .045),
-        0 0 12px rgba(0, 110, 255, .07);
-      transition:
-        transform .22s ease,
-        background .22s ease,
-        box-shadow .22s ease,
-        border-color .22s ease;
+      transition: transform .22s, background .22s, box-shadow .22s;
     }
 
     .link:hover,
     .link:focus-visible {
       transform: translateY(-3px);
-      background: rgba(5, 46, 81, .83);
+      background: rgba(5,46,81,.9);
       border-color: #55f2ff;
-      box-shadow: 0 0 18px rgba(0, 190, 255, .2);
+      box-shadow: 0 0 18px rgba(0,190,255,.2);
       outline: none;
-    }
-
-    .link:active {
-      transform: scale(.985);
     }
 
     .link-logo {
@@ -355,7 +329,7 @@
       flex-shrink: 0;
       color: var(--cyan);
       font-size: 24px;
-      transition: transform .2s ease;
+      transition: transform .2s;
     }
 
     .link:hover .link-action {
@@ -371,21 +345,21 @@
       max-width: calc(100% - 30px);
       padding: 13px 19px;
       color: #d9faff;
-      background: rgba(3, 23, 45, .94);
+      background: rgba(3,23,45,.96);
       border: 1px solid var(--cyan);
       border-radius: 13px;
-      box-shadow: 0 0 24px rgba(0, 190, 255, .2);
+      box-shadow: 0 0 24px rgba(0,190,255,.2);
       font-size: 13px;
       text-align: center;
       opacity: 0;
-      transform: translate(-50%, 12px);
+      transform: translate(-50%,12px);
       pointer-events: none;
       transition: opacity .2s, transform .2s;
     }
 
     #toast.show {
       opacity: 1;
-      transform: translate(-50%, 0);
+      transform: translate(-50%,0);
     }
 
     .footer {
@@ -399,16 +373,14 @@
       opacity: .8;
     }
 
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(13px);
-      }
+    @keyframes enter-pulse {
+      0%, 100% { opacity: .65; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.04); }
+    }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(13px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 600px) {
@@ -422,10 +394,6 @@
         font-size: 11px;
       }
 
-      .profile {
-        max-width: 460px;
-      }
-
       .avatar {
         width: 125px;
         height: 125px;
@@ -437,10 +405,6 @@
         border-radius: 21px;
       }
 
-      .name-plaque h1 {
-        font-size: clamp(29px, 8vw, 40px);
-      }
-
       .bio {
         padding: 14px;
         gap: 12px;
@@ -449,7 +413,6 @@
 
       .bio p {
         font-size: 14px;
-        line-height: 1.7;
       }
 
       .link {
@@ -465,18 +428,9 @@
         flex-basis: 30px;
       }
 
-      .link-title {
-        font-size: 15px;
-      }
-
-      .link-desc {
-        font-size: 12px;
-      }
-
-      .footer {
-        margin-top: 33px;
-        font-size: 9px;
-      }
+      .link-title { font-size: 15px; }
+      .link-desc { font-size: 12px; }
+      .footer { margin-top: 33px; font-size: 9px; }
     }
 
     @media (max-width: 420px) {
@@ -487,18 +441,9 @@
         padding: 8px 10px;
       }
 
-      .audio-volume {
-        min-width: 80px;
-      }
-
-      .audio-volume input {
-        width: 80px;
-      }
-
-      .audio-toggle {
-        width: 34px;
-        height: 34px;
-      }
+      .audio-volume { min-width: 80px; }
+      .audio-volume input { width: 80px; }
+      .audio-toggle { width: 34px; height: 34px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -516,42 +461,21 @@
   </div>
 
   <div class="audio-controls">
-    <button
-      id="audio-toggle"
-      class="audio-toggle"
-      type="button"
-      aria-label="Couper la musique"
-      aria-pressed="true"
-      title="Activer ou couper la musique"
-    >♫</button>
-
+    <button id="audio-toggle" class="audio-toggle" type="button" aria-label="Activer la musique" aria-pressed="false" title="Activer ou couper la musique">♫</button>
     <div class="audio-volume">
       <label for="audio-volume">Volume <span id="volume-value">50%</span></label>
-      <input
-        id="audio-volume"
-        type="range"
-        min="0"
-        max="100"
-        value="50"
-        aria-label="Volume de la musique"
-      >
+      <input id="audio-volume" type="range" min="0" max="100" value="50" aria-label="Volume de la musique">
     </div>
   </div>
 
   <audio id="background-music" loop preload="auto">
-    <source src="music.mp3" type="audio/mpeg">
+    <source src="./music.mp3" type="audio/mpeg">
   </audio>
 
-  <header class="topbar">
-    Portfolio
-  </header>
+  <header class="topbar">Portfolio</header>
 
   <main class="profile">
-    <img
-      class="avatar"
-      src="profile.png"
-      alt="coolbabyoff profile picture"
-    >
+    <img class="avatar" src="./profile.png" alt="coolbabyoff profile picture">
 
     <section class="name-plaque">
       <h1>coolbabyoff</h1>
@@ -560,20 +484,15 @@
     <section class="bio">
       <span class="bio-icon" aria-hidden="true">♟</span>
       <p>
-        Yo! I'm <strong>coolbabyoff</strong>, a junior Java &amp;
-        Python developer, sysadmin, and founder of
-        <strong>AgamesStudio</strong>, specializing in Minecraft
-        resource packs! (Salut Zoey)
+        Yo! I'm <strong>coolbabyoff</strong>, a junior Java &amp; Python developer,
+        sysadmin, and founder of <strong>AgamesStudio</strong>, specializing in
+        Minecraft resource packs! (Salut Zoey)
       </p>
     </section>
 
     <nav class="links" aria-label="My contacts and profiles">
-      <button
-        class="link"
-        type="button"
-        onclick="copyText('coolbabyoff', 'Discord username copied!')"
-      >
-        <img class="link-logo" src="discord.png" alt="">
+      <button class="link" type="button" data-copy="coolbabyoff" data-message="Discord username copied!">
+        <img class="link-logo" src="./discord.png" alt="">
         <span class="link-copy">
           <span class="link-title">Discord</span>
           <span class="link-desc">Click to copy: coolbabyoff</span>
@@ -581,13 +500,8 @@
         <span class="link-action" aria-hidden="true">▣</span>
       </button>
 
-      <a
-        class="link"
-        href="https://bit.ly/4ev9TRN"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img class="link-logo" src="paypal.png" alt="">
+      <a class="link" href="https://bit.ly/4ev9TRN" target="_blank" rel="noopener noreferrer">
+        <img class="link-logo" src="./paypal.png" alt="">
         <span class="link-copy">
           <span class="link-title">PayPal</span>
           <span class="link-desc">Support my projects</span>
@@ -595,13 +509,8 @@
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <a
-        class="link"
-        href="https://steamcommunity.com/id/CBOfficial/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img class="link-logo" src="steam.png" alt="">
+      <a class="link" href="https://steamcommunity.com/id/CBOfficial/" target="_blank" rel="noopener noreferrer">
+        <img class="link-logo" src="./steam.png" alt="">
         <span class="link-copy">
           <span class="link-title">Steam</span>
           <span class="link-desc">Check out my Steam profile</span>
@@ -609,13 +518,8 @@
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <a
-        class="link"
-        href="https://roblox.com/users/2521964602/profile"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img class="link-logo" src="roblox.png" alt="">
+      <a class="link" href="https://roblox.com/users/2521964602/profile" target="_blank" rel="noopener noreferrer">
+        <img class="link-logo" src="./roblox.png" alt="">
         <span class="link-copy">
           <span class="link-title">Roblox</span>
           <span class="link-desc">Visit my Roblox profile</span>
@@ -623,12 +527,8 @@
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <button
-        class="link"
-        type="button"
-        onclick="copyText('coolbabyofficiaL', 'PlayStation Network ID copied!')"
-      >
-        <img class="link-logo" src="playstation.png" alt="">
+      <button class="link" type="button" data-copy="coolbabyofficiaL" data-message="PlayStation Network ID copied!">
+        <img class="link-logo" src="./playstation.png" alt="">
         <span class="link-copy">
           <span class="link-title">PlayStation Network</span>
           <span class="link-desc">Click to copy: coolbabyofficiaL</span>
@@ -643,68 +543,63 @@
   <div id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    let toastTimer;
-
-    function showToast(message) {
-      const toast = document.getElementById("toast");
-
-      toast.textContent = message;
-      toast.classList.add("show");
-
-      clearTimeout(toastTimer);
-
-      toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2300);
-    }
-
-    async function copyText(text, message) {
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-        } else {
-          const textarea = document.createElement("textarea");
-          textarea.value = text;
-          textarea.style.position = "fixed";
-          textarea.style.left = "-9999px";
-
-          document.body.appendChild(textarea);
-          textarea.select();
-
-          const success = document.execCommand("copy");
-          textarea.remove();
-
-          if (!success) {
-            throw new Error("Copy failed");
-          }
-        }
-
-        showToast(message);
-      } catch (error) {
-        showToast("Copy manually: " + text);
-      }
-    }
-
     const enterScreen = document.getElementById("enter-screen");
     const backgroundMusic = document.getElementById("background-music");
     const audioToggle = document.getElementById("audio-toggle");
     const audioVolume = document.getElementById("audio-volume");
     const volumeValue = document.getElementById("volume-value");
+    const toast = document.getElementById("toast");
+    const magnetPlaque = document.querySelector(".name-plaque");
+
+    let entering = false;
+    let toastTimer;
+    let magnetFrame = null;
+    let pointerX = 0;
+    let pointerY = 0;
 
     backgroundMusic.volume = 0.5;
 
-    let entering = false;
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2300);
+    }
+
+    async function copyText(value, message) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(value);
+        } else {
+          const textarea = document.createElement("textarea");
+          textarea.value = value;
+          textarea.style.position = "fixed";
+          textarea.style.left = "-9999px";
+          document.body.appendChild(textarea);
+          textarea.select();
+          const copied = document.execCommand("copy");
+          textarea.remove();
+          if (!copied) throw new Error("Copy failed");
+        }
+
+        showToast(message);
+      } catch (error) {
+        showToast("Copy manually: " + value);
+      }
+    }
+
+    document.querySelectorAll("[data-copy]").forEach(button => {
+      button.addEventListener("click", () => {
+        copyText(button.dataset.copy, button.dataset.message);
+      });
+    });
 
     function updateAudioButton() {
-      const isPlaying = !backgroundMusic.paused && !backgroundMusic.muted;
-
-      audioToggle.textContent = isPlaying ? "♫" : "♪";
-      audioToggle.setAttribute(
-        "aria-label",
-        isPlaying ? "Couper la musique" : "Activer la musique"
-      );
-      audioToggle.setAttribute("aria-pressed", String(isPlaying));
-      audioToggle.title = isPlaying ? "Couper la musique" : "Activer la musique";
+      const playing = !backgroundMusic.paused && !backgroundMusic.muted;
+      audioToggle.textContent = playing ? "♫" : "♪";
+      audioToggle.setAttribute("aria-label", playing ? "Couper la musique" : "Activer la musique");
+      audioToggle.setAttribute("aria-pressed", String(playing));
+      audioToggle.title = playing ? "Couper la musique" : "Activer la musique";
     }
 
     async function enterSite() {
@@ -715,12 +610,9 @@
         await backgroundMusic.play();
         enterScreen.classList.add("hidden");
         document.body.classList.remove("enter-locked");
-
         updateAudioButton();
 
-        setTimeout(() => {
-          enterScreen.remove();
-        }, 750);
+        setTimeout(() => enterScreen.remove(), 750);
       } catch (error) {
         entering = false;
         enterScreen.querySelector("span").textContent = "CLICK TO ENTER — TRY AGAIN";
@@ -729,7 +621,7 @@
 
     enterScreen.addEventListener("click", enterSite);
 
-    enterScreen.addEventListener("keydown", (event) => {
+    enterScreen.addEventListener("keydown", event => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
         enterSite();
@@ -743,7 +635,7 @@
         try {
           await backgroundMusic.play();
         } catch (error) {
-          showToast("Clique d'abord sur CLICK TO ENTER pour lancer la musique.");
+          showToast("Clique sur CLICK TO ENTER pour lancer la musique.");
           return;
         }
       } else {
@@ -755,7 +647,6 @@
 
     audioVolume.addEventListener("input", () => {
       const volume = Number(audioVolume.value);
-
       backgroundMusic.volume = volume / 100;
       volumeValue.textContent = volume + "%";
 
@@ -769,6 +660,47 @@
     backgroundMusic.addEventListener("play", updateAudioButton);
     backgroundMusic.addEventListener("pause", updateAudioButton);
     backgroundMusic.addEventListener("volumechange", updateAudioButton);
+
+    function resetMagnet() {
+      magnetPlaque.style.setProperty("--magnet-x", "0px");
+      magnetPlaque.style.setProperty("--magnet-y", "0px");
+      magnetPlaque.classList.remove("magnet-active");
+    }
+
+    function updateMagnet() {
+      magnetFrame = null;
+
+      const rect = magnetPlaque.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const dx = pointerX - centerX;
+      const dy = pointerY - centerY;
+      const distance = Math.hypot(dx, dy);
+      const radius = 350;
+      const strength = Math.max(0, 1 - distance / radius);
+      const maxOffset = 65;
+
+      const offsetX = Math.max(-maxOffset, Math.min(maxOffset, dx * strength * 0.28));
+      const offsetY = Math.max(-maxOffset, Math.min(maxOffset, dy * strength * 0.28));
+
+      magnetPlaque.style.setProperty("--magnet-x", `${offsetX}px`);
+      magnetPlaque.style.setProperty("--magnet-y", `${offsetY}px`);
+      magnetPlaque.classList.toggle("magnet-active", strength > 0);
+    }
+
+    document.addEventListener("pointermove", event => {
+      if (event.pointerType === "touch") return;
+
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+
+      if (magnetFrame === null) {
+        magnetFrame = requestAnimationFrame(updateMagnet);
+      }
+    });
+
+    document.addEventListener("pointerleave", resetMagnet);
+    window.addEventListener("blur", resetMagnet);
 
     updateAudioButton();
   </script>
