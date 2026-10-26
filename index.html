@@ -36,7 +36,12 @@
       font-family: Inter, "Segoe UI", Arial, sans-serif;
       background-color: #06152b;
       background-image:
-        linear-gradient(180deg, rgba(2,12,30,.48), rgba(3,17,39,.22) 45%, rgba(1,10,26,.72)),
+        linear-gradient(
+          180deg,
+          rgba(2,12,30,.48),
+          rgba(3,17,39,.22) 45%,
+          rgba(1,10,26,.72)
+        ),
         url("./wallpaper.webp");
       background-position: center;
       background-size: cover;
@@ -48,6 +53,8 @@
     body.enter-locked {
       overflow: hidden;
     }
+
+    /* Écran d'entrée */
 
     #enter-screen {
       position: fixed;
@@ -86,6 +93,8 @@
       outline: 2px solid var(--cyan);
       outline-offset: -8px;
     }
+
+    /* Contrôles audio */
 
     .audio-controls {
       position: fixed;
@@ -147,6 +156,8 @@
       cursor: pointer;
     }
 
+    /* En-tête et profil */
+
     .topbar {
       width: 100%;
       max-width: 1200px;
@@ -179,12 +190,15 @@
       border-radius: 50%;
       border: 4px solid #40dfff;
       background: rgba(4,24,45,.8);
-      box-shadow: 0 0 12px rgba(32,233,255,.9), 0 0 35px rgba(0,166,255,.65);
+      box-shadow:
+        0 0 12px rgba(32,233,255,.9),
+        0 0 35px rgba(0,166,255,.65);
     }
 
-    /* Plaque en verre avec attraction verticale uniquement */
+    /* Plaque magnétique */
 
     .name-plaque {
+      --magnet-x: 0px;
       --magnet-y: 0px;
 
       width: 100%;
@@ -196,17 +210,23 @@
       text-align: center;
       position: relative;
       z-index: 1;
+
       border: 1px solid rgba(100,190,255,.65);
       border-radius: 25px;
       background: rgba(49,112,168,.22);
       backdrop-filter: blur(19px);
       -webkit-backdrop-filter: blur(19px);
+
       box-shadow:
         inset 0 0 25px rgba(93,186,255,.08),
         0 0 22px rgba(0,145,255,.08);
 
-      /* X reste toujours à zéro */
-      transform: translate3d(0, var(--magnet-y), 0);
+      /* Déplacement horizontal ET vertical */
+      transform: translate3d(
+        var(--magnet-x),
+        var(--magnet-y),
+        0
+      );
 
       transition:
         transform .22s cubic-bezier(.2,.8,.2,1),
@@ -230,8 +250,13 @@
       font-size: clamp(32px,7vw,47px);
       font-weight: 750;
       letter-spacing: -.035em;
-      text-shadow: 0 0 8px rgba(85,176,255,.8), 0 0 24px rgba(37,145,255,.4);
+      overflow-wrap: anywhere;
+      text-shadow:
+        0 0 8px rgba(85,176,255,.8),
+        0 0 24px rgba(37,145,255,.4);
     }
+
+    /* Bio */
 
     .bio {
       width: 94%;
@@ -267,6 +292,8 @@
       font-weight: 700;
     }
 
+    /* Liens */
+
     .links {
       width: 94%;
       display: grid;
@@ -290,7 +317,11 @@
       border-radius: 23px;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      transition: transform .22s, background .22s, box-shadow .22s;
+      transition:
+        transform .22s,
+        background .22s,
+        box-shadow .22s,
+        border-color .22s;
     }
 
     .link:hover,
@@ -329,6 +360,7 @@
       color: #8ed5ff;
       font-size: 13px;
       line-height: 1.5;
+      overflow-wrap: anywhere;
     }
 
     .link-action {
@@ -341,6 +373,8 @@
     .link:hover .link-action {
       transform: translateX(3px);
     }
+
+    /* Notification de copie */
 
     #toast {
       position: fixed;
@@ -368,6 +402,8 @@
       transform: translate(-50%,0);
     }
 
+    /* Pied de page */
+
     .footer {
       margin-top: 42px;
       margin-bottom: 5px;
@@ -380,14 +416,30 @@
     }
 
     @keyframes enter-pulse {
-      0%, 100% { opacity: .65; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.04); }
+      0%, 100% {
+        opacity: .65;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.04);
+      }
     }
 
     @keyframes fade-in {
-      from { opacity: 0; transform: translateY(13px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(13px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
+    /* Responsive */
 
     @media (max-width: 600px) {
       body {
@@ -434,9 +486,18 @@
         flex-basis: 30px;
       }
 
-      .link-title { font-size: 15px; }
-      .link-desc { font-size: 12px; }
-      .footer { margin-top: 33px; font-size: 9px; }
+      .link-title {
+        font-size: 15px;
+      }
+
+      .link-desc {
+        font-size: 12px;
+      }
+
+      .footer {
+        margin-top: 33px;
+        font-size: 9px;
+      }
     }
 
     @media (max-width: 420px) {
@@ -447,13 +508,24 @@
         padding: 8px 10px;
       }
 
-      .audio-volume { min-width: 80px; }
-      .audio-volume input { width: 80px; }
-      .audio-toggle { width: 34px; height: 34px; }
+      .audio-volume {
+        min-width: 80px;
+      }
+
+      .audio-volume input {
+        width: 80px;
+      }
+
+      .audio-toggle {
+        width: 34px;
+        height: 34px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         animation: none !important;
         transition: none !important;
       }
@@ -463,10 +535,17 @@
 
 <body class="enter-locked">
 
-  <div id="enter-screen" role="button" tabindex="0" aria-label="Click to enter">
+  <!-- Écran d'entrée -->
+  <div
+    id="enter-screen"
+    role="button"
+    tabindex="0"
+    aria-label="Click to enter"
+  >
     <span>CLICK TO ENTER</span>
   </div>
 
+  <!-- Contrôles de la musique -->
   <div class="audio-controls">
     <button
       id="audio-toggle"
@@ -481,6 +560,7 @@
       <label for="audio-volume">
         Volume <span id="volume-value">50%</span>
       </label>
+
       <input
         id="audio-volume"
         type="range"
@@ -499,7 +579,12 @@
   <header class="topbar">Portfolio</header>
 
   <main class="profile">
-    <img class="avatar" src="./profile.png" alt="coolbabyoff profile picture">
+
+    <img
+      class="avatar"
+      src="./profile.png"
+      alt="coolbabyoff profile picture"
+    >
 
     <section class="name-plaque">
       <h1>coolbabyoff</h1>
@@ -507,10 +592,12 @@
 
     <section class="bio">
       <span class="bio-icon" aria-hidden="true">♟</span>
+
       <p>
-        Yo! I'm <strong>coolbabyoff</strong>, a junior Java &amp; Python developer,
-        sysadmin, and founder of <strong>AgamesStudio</strong>, specializing in
-        Minecraft resource packs! (Salut Zoey)
+        Yo! I'm <strong>coolbabyoff</strong>, a junior Java &amp; Python
+        developer, sysadmin, and founder of
+        <strong>AgamesStudio</strong>, specializing in Minecraft resource
+        packs! (Salut Zoey)
       </p>
     </section>
 
@@ -523,10 +610,12 @@
         data-message="Discord username copied!"
       >
         <img class="link-logo" src="./discord.png" alt="">
+
         <span class="link-copy">
           <span class="link-title">Discord</span>
           <span class="link-desc">Click to copy: coolbabyoff</span>
         </span>
+
         <span class="link-action" aria-hidden="true">▣</span>
       </button>
 
@@ -537,10 +626,12 @@
         rel="noopener noreferrer"
       >
         <img class="link-logo" src="./paypal.png" alt="">
+
         <span class="link-copy">
           <span class="link-title">PayPal</span>
           <span class="link-desc">Support my projects</span>
         </span>
+
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
@@ -551,10 +642,12 @@
         rel="noopener noreferrer"
       >
         <img class="link-logo" src="./steam.png" alt="">
+
         <span class="link-copy">
           <span class="link-title">Steam</span>
           <span class="link-desc">Check out my Steam profile</span>
         </span>
+
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
@@ -565,10 +658,12 @@
         rel="noopener noreferrer"
       >
         <img class="link-logo" src="./roblox.png" alt="">
+
         <span class="link-copy">
           <span class="link-title">Roblox</span>
           <span class="link-desc">Visit my Roblox profile</span>
         </span>
+
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
@@ -579,10 +674,12 @@
         data-message="PlayStation Network ID copied!"
       >
         <img class="link-logo" src="./playstation.png" alt="">
+
         <span class="link-copy">
           <span class="link-title">PlayStation Network</span>
           <span class="link-desc">Click to copy: coolbabyofficiaL</span>
         </span>
+
         <span class="link-action" aria-hidden="true">▣</span>
       </button>
 
@@ -609,15 +706,18 @@
     backgroundMusic.volume = 0.5;
 
     function updateAudioButton() {
-      const playing = !backgroundMusic.paused &&
-                      !backgroundMusic.muted;
+      const playing =
+        !backgroundMusic.paused && !backgroundMusic.muted;
 
       audioToggle.textContent = playing ? "♫" : "♪";
+
       audioToggle.setAttribute(
         "aria-label",
         playing ? "Couper la musique" : "Activer la musique"
       );
+
       audioToggle.setAttribute("aria-pressed", String(playing));
+
       audioToggle.title = playing
         ? "Couper la musique"
         : "Activer la musique";
@@ -639,6 +739,7 @@
         setTimeout(() => enterScreen.remove(), 750);
       } catch (error) {
         entering = false;
+
         enterScreen.querySelector("span").textContent =
           "CLICK TO ENTER — TRY AGAIN";
       }
@@ -688,16 +789,17 @@
     backgroundMusic.addEventListener("volumechange", updateAudioButton);
 
     // ==========================================
-    // PLAQUE MAGNÉTIQUE : AXE VERTICAL SEULEMENT
+    // EFFET MAGNÉTIQUE : X ET Y, MAXIMUM 70 PX
     // ==========================================
 
     const magnetPlaque = document.querySelector(".name-plaque");
 
+    let pointerX = 0;
     let pointerY = 0;
     let magnetFrame = null;
 
-    const magnetRadius = 350;
-    const maxMagnetOffset = 65;
+    const magnetRadius = 400;
+    const maxMagnetOffset = 70;
     const magnetForce = 0.28;
 
     function resetMagnet() {
@@ -706,6 +808,7 @@
         magnetFrame = null;
       }
 
+      magnetPlaque.style.setProperty("--magnet-x", "0px");
       magnetPlaque.style.setProperty("--magnet-y", "0px");
       magnetPlaque.classList.remove("magnet-active");
     }
@@ -715,36 +818,49 @@
 
       const rect = magnetPlaque.getBoundingClientRect();
 
-      // Centre corrigé pour ne pas cumuler les déplacements.
-      const currentOffset =
+      // Centre de la plaque avant son déplacement.
+      const currentX =
+        parseFloat(
+          getComputedStyle(magnetPlaque)
+            .getPropertyValue("--magnet-x")
+        ) || 0;
+
+      const currentY =
         parseFloat(
           getComputedStyle(magnetPlaque)
             .getPropertyValue("--magnet-y")
         ) || 0;
 
-      const centerY =
-        rect.top + rect.height / 2 - currentOffset;
+      const centerX = rect.left + rect.width / 2 - currentX;
+      const centerY = rect.top + rect.height / 2 - currentY;
 
+      const dx = pointerX - centerX;
       const dy = pointerY - centerY;
-      const distance = Math.abs(dy);
 
+      const distance = Math.hypot(dx, dy);
+
+      // L'attraction diminue progressivement à distance.
       const strength = Math.max(
         0,
         1 - distance / magnetRadius
       );
 
+      let offsetX = dx * strength * magnetForce;
       let offsetY = dy * strength * magnetForce;
+
+      // Limite indépendante de 70 px pour chaque axe.
+      offsetX = Math.max(
+        -maxMagnetOffset,
+        Math.min(maxMagnetOffset, offsetX)
+      );
 
       offsetY = Math.max(
         -maxMagnetOffset,
         Math.min(maxMagnetOffset, offsetY)
       );
 
-      // Aucun calcul ni déplacement horizontal.
-      magnetPlaque.style.setProperty(
-        "--magnet-y",
-        `${offsetY}px`
-      );
+      magnetPlaque.style.setProperty("--magnet-x", `${offsetX}px`);
+      magnetPlaque.style.setProperty("--magnet-y", `${offsetY}px`);
 
       magnetPlaque.classList.toggle(
         "magnet-active",
@@ -755,6 +871,7 @@
     document.addEventListener("pointermove", event => {
       if (event.pointerType === "touch") return;
 
+      pointerX = event.clientX;
       pointerY = event.clientY;
 
       if (magnetFrame === null) {
