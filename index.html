@@ -96,6 +96,18 @@
       outline-offset: 4px;
     }
 
+    .githubkart-button:hover,
+    .githubkart-button:focus-visible {
+      background: rgba(5,46,81,.95);
+      transform: translateY(-2px);
+      box-shadow: 0 0 18px rgba(0,190,255,.25);
+    }
+
+    .githubkart-button:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
     #enter-screen {
       position: fixed;
       inset: 0;
@@ -631,13 +643,20 @@
 
 <body class="enter-locked">
 
-  <!-- Cookie Clicker: opens in the same tab -->
   <a
     href="https://coolbabyoff.github.io/cookiesclicker"
     class="cookie-clicker-button"
     aria-label="Open Cookie Clicker"
   >
     Cookie Clicker
+  </a>
+
+    <a
+    href="https://coolbabyoff.github.io/githubkart"
+    class="githubkart-button"
+    aria-label="Open GithubCart"
+  >
+    GithubCart
   </a>
 
   <div
