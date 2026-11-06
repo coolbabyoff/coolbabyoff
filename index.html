@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +17,7 @@
       --muted: #a8d8f5;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html {
       min-height: 100%;
@@ -50,9 +49,7 @@
       overflow-x: hidden;
     }
 
-    body.enter-locked {
-      overflow: hidden;
-    }
+    body.enter-locked { overflow: hidden; }
 
     .floating-button {
       position: fixed;
@@ -76,19 +73,11 @@
       letter-spacing: .08em;
       text-decoration: none;
       text-transform: uppercase;
-      transition:
-        background .2s,
-        transform .2s,
-        box-shadow .2s;
+      transition: background .2s, transform .2s, box-shadow .2s;
     }
 
-    .cookie-clicker-button {
-      top: 18px;
-    }
-
-    .githubkart-button {
-      top: 88px;
-    }
+    .cookie-clicker-button { top: 18px; }
+    .githubkart-button { top: 88px; }
 
     .floating-button:hover,
     .floating-button:focus-visible {
@@ -258,11 +247,7 @@
       box-shadow:
         inset 0 0 25px rgba(93,186,255,.08),
         0 0 22px rgba(0,145,255,.08);
-      transform: translate3d(
-        var(--magnet-x),
-        var(--magnet-y),
-        0
-      );
+      transform: translate3d(var(--magnet-x),var(--magnet-y),0);
       transition:
         transform .22s cubic-bezier(.2,.8,.2,1),
         border-color .25s ease,
@@ -372,10 +357,7 @@
       object-position: center;
     }
 
-    .link-copy {
-      flex: 1;
-      min-width: 0;
-    }
+    .link-copy { flex: 1; min-width: 0; }
 
     .link-title {
       display: block;
@@ -400,37 +382,125 @@
       transition: transform .2s;
     }
 
-    .link:hover .link-action {
-      transform: translateX(3px);
-    }
+    .link:hover .link-action { transform: translateX(3px); }
 
     .link.contact-button {
-      background: linear-gradient(
-        110deg,
-        #ffad32 0%,
-        #ff6b25 45%,
-        #ed303b 100%
-      );
+      background: linear-gradient(110deg,#ffad32 0%,#ff6b25 45%,#ed303b 100%);
       border-color: rgba(255,126,45,.9);
       box-shadow: 0 0 18px rgba(255,91,35,.12);
     }
 
     .link.contact-button .link-title,
     .link.contact-button .link-desc,
-    .link.contact-button .link-action {
-      color: #fff;
-    }
+    .link.contact-button .link-action { color: #fff; }
 
     .link.contact-button:hover,
     .link.contact-button:focus-visible {
-      background: linear-gradient(
-        110deg,
-        #ffc45c 0%,
-        #ff572d 48%,
-        #d91d42 100%
-      );
+      background: linear-gradient(110deg,#ffc45c 0%,#ff572d 48%,#d91d42 100%);
       border-color: #ffbd70;
       box-shadow: 0 0 22px rgba(255,76,39,.3);
+    }
+
+    /* GOOGLE TRENDS WIDGET */
+    #trends-widget {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 9000;
+      width: 350px;
+      max-width: calc(100vw - 30px);
+      padding: 14px;
+      overflow: hidden;
+      color: var(--text);
+      background: rgba(3,20,43,.92);
+      border: 1px solid rgba(32,233,255,.55);
+      border-radius: 17px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 0 25px rgba(0,190,255,.13);
+      transition: width .25s, padding .25s;
+    }
+
+    .trends-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .trends-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #a9d9ff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .trends-dot {
+      width: 8px;
+      height: 8px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+    }
+
+    .trends-collapse {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      color: var(--cyan);
+      background: rgba(32,233,255,.08);
+      border: 1px solid rgba(32,233,255,.35);
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 17px;
+      transition: background .2s;
+    }
+
+    .trends-collapse:hover {
+      background: rgba(32,233,255,.2);
+    }
+
+    #trends-chart {
+      width: 100%;
+      min-height: 220px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: rgba(255,255,255,.02);
+    }
+
+    #trends-chart iframe {
+      display: block;
+      width: 100% !important;
+      max-width: 100% !important;
+      border: 0 !important;
+    }
+
+    .trends-footer {
+      margin-top: 9px;
+      color: rgba(169,217,255,.6);
+      font-size: 10px;
+      text-align: center;
+    }
+
+    #trends-widget.collapsed {
+      width: 190px;
+      padding: 10px 12px;
+    }
+
+    #trends-widget.collapsed .trends-header {
+      margin-bottom: 0;
+    }
+
+    #trends-widget.collapsed #trends-chart,
+    #trends-widget.collapsed .trends-footer {
+      display: none;
     }
 
     #toast {
@@ -511,27 +581,13 @@
     }
 
     @keyframes enter-pulse {
-      0%, 100% {
-        opacity: .65;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.04);
-      }
+      0%, 100% { opacity: .65; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.04); }
     }
 
     @keyframes fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(13px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(13px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 600px) {
@@ -540,15 +596,8 @@
         background-attachment: scroll;
       }
 
-      .topbar {
-        margin-bottom: 55px;
-        font-size: 11px;
-      }
-
-      .avatar {
-        width: 125px;
-        height: 125px;
-      }
+      .topbar { margin-bottom: 55px; font-size: 11px; }
+      .avatar { width: 125px; height: 125px; }
 
       .name-plaque {
         min-height: 90px;
@@ -562,9 +611,7 @@
         border-radius: 19px;
       }
 
-      .bio p {
-        font-size: 14px;
-      }
+      .bio p { font-size: 14px; }
 
       .link {
         min-height: 75px;
@@ -579,18 +626,17 @@
         flex-basis: 30px;
       }
 
-      .link-title {
-        font-size: 15px;
+      .link-title { font-size: 15px; }
+      .link-desc { font-size: 12px; }
+      .footer { margin-top: 33px; font-size: 9px; }
+
+      #trends-widget {
+        right: 10px;
+        bottom: 10px;
+        width: min(310px, calc(100vw - 20px));
       }
 
-      .link-desc {
-        font-size: 12px;
-      }
-
-      .footer {
-        margin-top: 33px;
-        font-size: 9px;
-      }
+      #trends-chart { min-height: 190px; }
     }
 
     @media (max-width: 420px) {
@@ -601,13 +647,8 @@
         font-size: 10px;
       }
 
-      .cookie-clicker-button {
-        top: 10px;
-      }
-
-      .githubkart-button {
-        top: 72px;
-      }
+      .cookie-clicker-button { top: 10px; }
+      .githubkart-button { top: 72px; }
 
       .audio-controls {
         top: 10px;
@@ -616,24 +657,21 @@
         padding: 8px 10px;
       }
 
-      .audio-volume {
-        min-width: 80px;
-      }
-
-      .audio-volume input {
-        width: 80px;
-      }
+      .audio-volume { min-width: 80px; }
+      .audio-volume input { width: 80px; }
 
       .audio-toggle {
         width: 34px;
         height: 34px;
       }
+
+      #trends-widget {
+        width: min(280px, calc(100vw - 20px));
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
+      *, *::before, *::after {
         animation: none !important;
         transition: none !important;
         scroll-behavior: auto !important;
@@ -644,54 +682,34 @@
 
 <body class="enter-locked">
 
-  <a
-    href="https://coolbabyoff.github.io/cookiesclicker"
-    class="floating-button cookie-clicker-button"
-    aria-label="Open Cookie Clicker"
-  >
+  <a href="https://coolbabyoff.github.io/cookiesclicker"
+     class="floating-button cookie-clicker-button"
+     aria-label="Open Cookie Clicker">
     Cookie Clicker
   </a>
 
-  <a
-    href="https://coolbabyoff.github.io/githubkart"
-    class="floating-button githubkart-button"
-    aria-label="Open GithubCart"
-  >
+  <a href="https://coolbabyoff.github.io/githubkart"
+     class="floating-button githubkart-button"
+     aria-label="Open GithubCart">
     GithubCart
   </a>
 
-  <div
-    id="enter-screen"
-    role="button"
-    tabindex="0"
-    aria-label="Click to enter"
-  >
+  <div id="enter-screen" role="button" tabindex="0"
+       aria-label="Click to enter">
     <span>CLICK TO ENTER</span>
   </div>
 
   <div class="audio-controls">
-    <button
-      id="audio-toggle"
-      class="audio-toggle"
-      type="button"
-      aria-label="Enable music"
-      aria-pressed="false"
-      title="Toggle background music"
-    >♫</button>
+    <button id="audio-toggle" class="audio-toggle" type="button"
+            aria-label="Enable music" aria-pressed="false"
+            title="Toggle background music">♫</button>
 
     <div class="audio-volume">
       <label for="audio-volume">
         Volume <span id="volume-value">50%</span>
       </label>
-
-      <input
-        id="audio-volume"
-        type="range"
-        min="0"
-        max="100"
-        value="50"
-        aria-label="Music volume"
-      >
+      <input id="audio-volume" type="range" min="0" max="100"
+             value="50" aria-label="Music volume">
     </div>
   </div>
 
@@ -699,15 +717,32 @@
     <source src="./music.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- GOOGLE TRENDS -->
+  <aside id="trends-widget" aria-label="Google Trends search interest">
+    <div class="trends-header">
+      <div class="trends-heading">
+        <span class="trends-dot"></span>
+        <span>Google Trends</span>
+      </div>
+
+      <button id="trends-collapse" class="trends-collapse"
+              type="button" aria-label="Collapse Google Trends"
+              aria-expanded="true">−</button>
+    </div>
+
+    <div id="trends-chart"></div>
+
+    <div class="trends-footer">
+      Search interest · coolbabyoff · Last 30 days
+    </div>
+  </aside>
+
   <header class="topbar">Portfolio</header>
 
   <main class="profile">
 
-    <img
-      class="avatar"
-      src="./profile.png"
-      alt="coolbabyoff profile picture"
-    >
+    <img class="avatar" src="./profile.png"
+         alt="coolbabyoff profile picture">
 
     <section class="name-plaque">
       <h1>coolbabyoff</h1>
@@ -715,110 +750,77 @@
 
     <section class="bio">
       <span class="bio-icon" aria-hidden="true">♟</span>
-
       <p>
         Yo! I'm <strong>coolbabyoff</strong>, a junior Java &amp; Python
         developer, sysadmin, and founder of
         <strong>AgamesStudio</strong>, specializing in Minecraft resource
-        packs!
+        packs! (Salut Zoey)
       </p>
     </section>
 
     <nav class="links" aria-label="My contacts and profiles">
 
-      <button
-        class="link"
-        type="button"
-        data-copy="coolbabyoff"
-        data-message="Discord username copied!"
-      >
+      <button class="link" type="button"
+              data-copy="coolbabyoff"
+              data-message="Discord username copied!">
         <img class="link-logo" src="./discord.png" alt="">
-
         <span class="link-copy">
           <span class="link-title">Discord</span>
           <span class="link-desc">Click to copy: coolbabyoff</span>
         </span>
-
         <span class="link-action" aria-hidden="true">▣</span>
       </button>
 
-      <a
-        class="link"
-        href="https://www.paypal.com/donate/?hosted_button_id=4DCZWDYHR2RMG"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class="link"
+         href="https://www.paypal.com/donate/?hosted_button_id=4DCZWDYHR2RMG"
+         target="_blank" rel="noopener noreferrer">
         <img class="link-logo" src="./paypal.png" alt="">
-
         <span class="link-copy">
           <span class="link-title">PayPal</span>
           <span class="link-desc">Support my projects</span>
         </span>
-
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <a
-        class="link"
-        href="https://steamcommunity.com/id/CBOfficial/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class="link" href="https://steamcommunity.com/id/CBOfficial/"
+         target="_blank" rel="noopener noreferrer">
         <img class="link-logo" src="./steam.png" alt="">
-
         <span class="link-copy">
           <span class="link-title">Steam</span>
           <span class="link-desc">Check out my Steam profile</span>
         </span>
-
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <a
-        class="link"
-        href="https://roblox.com/users/2521964602/profile"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class="link" href="https://roblox.com/users/2521964602/profile"
+         target="_blank" rel="noopener noreferrer">
         <img class="link-logo" src="./roblox.png" alt="">
-
         <span class="link-copy">
           <span class="link-title">Roblox</span>
           <span class="link-desc">Visit my Roblox profile</span>
         </span>
-
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
-      <button
-        class="link"
-        type="button"
-        data-copy="coolbabyofficiaL"
-        data-message="PlayStation Network ID copied!"
-      >
+      <button class="link" type="button"
+              data-copy="coolbabyofficiaL"
+              data-message="PlayStation Network ID copied!">
         <img class="link-logo" src="./playstation.png" alt="">
-
         <span class="link-copy">
           <span class="link-title">PlayStation Network</span>
           <span class="link-desc">Click to copy: coolbabyofficiaL</span>
         </span>
-
         <span class="link-action" aria-hidden="true">▣</span>
       </button>
 
-      <a
-        class="link contact-button"
-        href="https://www.curseforge.com/members/AgamesStudio/projects"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class="link contact-button"
+         href="https://www.curseforge.com/members/AgamesStudio/projects"
+         target="_blank" rel="noopener noreferrer">
         <img class="link-logo" src="./agamesstudio.png" alt="">
-
         <span class="link-copy">
           <span class="link-title">AgamesStudio Projects</span>
           <span class="link-desc">Discover AgamesStudio projects on CurseForge</span>
         </span>
-
         <span class="link-action" aria-hidden="true">↗</span>
       </a>
 
@@ -835,6 +837,9 @@
 
   <div id="toast" role="status" aria-live="polite"></div>
 
+  <!-- Google Trends embed loader -->
+  <script src="https://ssl.gstatic.com/trends_nrtr/4630_RC01/embed_loader.js"></script>
+
   <script>
     const enterScreen = document.getElementById("enter-screen");
     const backgroundMusic = document.getElementById("background-music");
@@ -847,40 +852,26 @@
     backgroundMusic.volume = 0.5;
 
     function updateAudioButton() {
-      const playing =
-        !backgroundMusic.paused && !backgroundMusic.muted;
+      const playing = !backgroundMusic.paused && !backgroundMusic.muted;
 
       audioToggle.textContent = playing ? "♫" : "♪";
-
-      audioToggle.setAttribute(
-        "aria-label",
-        playing ? "Mute music" : "Enable music"
-      );
-
+      audioToggle.setAttribute("aria-label", playing ? "Mute music" : "Enable music");
       audioToggle.setAttribute("aria-pressed", String(playing));
-
-      audioToggle.title = playing
-        ? "Mute music"
-        : "Enable music";
+      audioToggle.title = playing ? "Mute music" : "Enable music";
     }
 
     async function enterSite() {
       if (entering) return;
-
       entering = true;
 
       try {
         await backgroundMusic.play();
-
         enterScreen.classList.add("hidden");
         document.body.classList.remove("enter-locked");
-
         updateAudioButton();
-
         setTimeout(() => enterScreen.remove(), 750);
       } catch (error) {
         entering = false;
-
         enterScreen.querySelector("span").textContent =
           "CLICK TO ENTER — TRY AGAIN";
       }
@@ -914,7 +905,6 @@
 
     audioVolume.addEventListener("input", () => {
       const volume = Number(audioVolume.value);
-
       backgroundMusic.volume = volume / 100;
       volumeValue.textContent = volume + "%";
 
@@ -929,6 +919,7 @@
     backgroundMusic.addEventListener("pause", updateAudioButton);
     backgroundMusic.addEventListener("volumechange", updateAudioButton);
 
+    /* Magnetic name plaque */
     const magnetPlaque = document.querySelector(".name-plaque");
 
     let pointerX = 0;
@@ -956,50 +947,28 @@
       const rect = magnetPlaque.getBoundingClientRect();
 
       const currentX =
-        parseFloat(
-          getComputedStyle(magnetPlaque)
-            .getPropertyValue("--magnet-x")
-        ) || 0;
+        parseFloat(getComputedStyle(magnetPlaque).getPropertyValue("--magnet-x")) || 0;
 
       const currentY =
-        parseFloat(
-          getComputedStyle(magnetPlaque)
-            .getPropertyValue("--magnet-y")
-        ) || 0;
+        parseFloat(getComputedStyle(magnetPlaque).getPropertyValue("--magnet-y")) || 0;
 
       const centerX = rect.left + rect.width / 2 - currentX;
       const centerY = rect.top + rect.height / 2 - currentY;
 
       const dx = pointerX - centerX;
       const dy = pointerY - centerY;
-
       const distance = Math.hypot(dx, dy);
-
-      const strength = Math.max(
-        0,
-        1 - distance / magnetRadius
-      );
+      const strength = Math.max(0, 1 - distance / magnetRadius);
 
       let offsetX = dx * strength * magnetForce;
       let offsetY = dy * strength * magnetForce;
 
-      offsetX = Math.max(
-        -maxMagnetOffset,
-        Math.min(maxMagnetOffset, offsetX)
-      );
-
-      offsetY = Math.max(
-        -maxMagnetOffset,
-        Math.min(maxMagnetOffset, offsetY)
-      );
+      offsetX = Math.max(-maxMagnetOffset, Math.min(maxMagnetOffset, offsetX));
+      offsetY = Math.max(-maxMagnetOffset, Math.min(maxMagnetOffset, offsetY));
 
       magnetPlaque.style.setProperty("--magnet-x", `${offsetX}px`);
       magnetPlaque.style.setProperty("--magnet-y", `${offsetY}px`);
-
-      magnetPlaque.classList.toggle(
-        "magnet-active",
-        strength > 0
-      );
+      magnetPlaque.classList.toggle("magnet-active", strength > 0);
     }
 
     document.addEventListener("pointermove", event => {
@@ -1017,6 +986,7 @@
     window.addEventListener("blur", resetMagnet);
     window.addEventListener("resize", resetMagnet);
 
+    /* Toast notifications */
     const toast = document.getElementById("toast");
     let toastTimer;
 
@@ -1031,13 +1001,13 @@
       }, 2300);
     }
 
+    /* Copy buttons */
     async function copyText(value, message) {
       try {
         if (navigator.clipboard && window.isSecureContext) {
           await navigator.clipboard.writeText(value);
         } else {
           const textarea = document.createElement("textarea");
-
           textarea.value = value;
           textarea.style.position = "fixed";
           textarea.style.left = "-9999px";
@@ -1048,9 +1018,7 @@
           const copied = document.execCommand("copy");
           textarea.remove();
 
-          if (!copied) {
-            throw new Error("Copy failed");
-          }
+          if (!copied) throw new Error("Copy failed");
         }
 
         showToast(message);
@@ -1061,31 +1029,72 @@
 
     document.querySelectorAll("[data-copy]").forEach(button => {
       button.addEventListener("click", () => {
-        copyText(
-          button.dataset.copy,
-          button.dataset.message
-        );
+        copyText(button.dataset.copy, button.dataset.message);
       });
     });
 
+    /* Browser-local visit counter */
     const visitCountElement = document.getElementById("visit-count");
     const visitStorageKey = "coolbabyoff-portfolio-visits";
 
     try {
-      let visitCount =
-        Number(localStorage.getItem(visitStorageKey)) || 0;
-
-      visitCount += 1;
+      let visitCount = Number(localStorage.getItem(visitStorageKey)) || 0;
+      visitCount++;
 
       localStorage.setItem(visitStorageKey, String(visitCount));
-
-      visitCountElement.textContent =
-        visitCount.toLocaleString("en-US");
+      visitCountElement.textContent = visitCount.toLocaleString("en-US");
     } catch (error) {
       visitCountElement.textContent = "Unavailable";
+    }
+
+    /* Google Trends widget */
+    const trendsWidget = document.getElementById("trends-widget");
+    const trendsCollapse = document.getElementById("trends-collapse");
+
+    trendsCollapse.addEventListener("click", () => {
+      const collapsed = trendsWidget.classList.toggle("collapsed");
+
+      trendsCollapse.textContent = collapsed ? "+" : "−";
+      trendsCollapse.setAttribute("aria-expanded", String(!collapsed));
+      trendsCollapse.setAttribute(
+        "aria-label",
+        collapsed ? "Expand Google Trends" : "Collapse Google Trends"
+      );
+    });
+
+    function loadGoogleTrends() {
+      if (!window.trends || !window.trends.embed) {
+        document.getElementById("trends-chart").textContent =
+          "Google Trends is temporarily unavailable.";
+        return;
+      }
+
+      window.trends.embed.renderExploreWidget(
+        "TIMESERIES",
+        {
+          comparisonItem: [{
+            keyword: "coolbabyoff",
+            geo: "",
+            time: "today 1-m"
+          }],
+          category: 0,
+          property: ""
+        },
+        {
+          exploreQuery: "date=today%201-m&q=coolbabyoff&hl=fr",
+          guestPath: "https://trends.google.fr:443/trends/embed/"
+        }
+      );
+    }
+
+    if (window.trends && window.trends.embed) {
+      loadGoogleTrends();
+    } else {
+      window.addEventListener("load", loadGoogleTrends, { once: true });
     }
 
     updateAudioButton();
   </script>
 </body>
 </html>
+
